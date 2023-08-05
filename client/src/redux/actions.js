@@ -21,7 +21,7 @@ export const CLEAR = "CLEAR";
 
 //? ACTIONS
 
-export const getAllRecipes = (page) => {
+export const getAllRecipes = (page = 1) => {
   return async (dispatch) => {
     try {
       const endpoint = `http://localhost:3001/?page=${page}`;

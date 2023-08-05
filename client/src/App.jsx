@@ -6,11 +6,12 @@ import Landing from "./componentes/landing/landing";
 import Nav from "./componentes/nav/nav";
  import Home from "./componentes/home/home";
 import Footer from "./componentes/footer/footer";
-
+import ErrorHandler from "./componentes/errors/error";
 function App() {
   let ubi = useLocation();
   return (
     <div className="App">
+        <ErrorHandler/>
       {ubi.pathname !== "/" && <Nav showNav={ubi.pathname !== "/"} />}
       <Routes>
         <Route path="/" element={<Landing />}></Route>
