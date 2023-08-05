@@ -1,3 +1,39 @@
 .containerNav{
-    background-color: aqua;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 15vh; 
+    background: linear-gradient(to right, #606c88, #3f4c6b);  
+}
+    .tituloNav{
+        padding-left: 2rem;
+        width: 50%;
+        display: flex;
+        flex-direction: left;
+        font-size: 2rem;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #ffffff;
+    }
+    .containerBotonesNav{
+     width: 50%;
+    display: flex;
+    justify-content: right;  
+    padding: 1rem 3rem;
+    }
+    
+    .btn1{
+        padding: 8px 16px;
+        margin-right: 10px;
+        background-color: #ffffff;
+        color: #ff0000;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    
+    .btn1:hover,
+    .btn1:active {
+      background-color: #00ffc8;
+      color: #ffffff;
     }

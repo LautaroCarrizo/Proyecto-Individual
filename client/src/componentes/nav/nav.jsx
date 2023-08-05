@@ -1,10 +1,23 @@
 import "./nav.css"
 
-export default function Footer () {
+import {NavLink} from "react-router-dom"
+
+export default function Nav () {
 
     return (
-        <div className="containerNav">   
-            <div><h1>Soy el nav</h1></div>
+        <nav className="containerNav">
+        <h1 className="tituloNav">Proyecto Integrador</h1>
+        <div className="containerBotonesNav">
+        <button className= "btn1">
+            <NavLink style={{ textDecoration: "none" }} to="/home"> Home </NavLink>
+        </button>
+        <button className= "btn1">
+            <NavLink style={{ textDecoration: "none" }} to="/form"> Formulario </NavLink>
+        </button>
+        <button className= "btn1">
+            <NavLink style={{ textDecoration: "none" }} to="/Favorites"> Favorites </NavLink>
+        </button>
         </div>
+    </nav>
     )
 }
