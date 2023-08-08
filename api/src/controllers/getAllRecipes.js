@@ -6,7 +6,7 @@ const { API_KEY } = process.env;
 async function getAllRecipes(req, res) {
   try {
     const response = await axios.get(
-      `${URL}?apiKey=${API_KEY}&addRecipeInformation=true&number=${recipesPerPage}&offset=${startIdx}`
+      `${URL}?apiKey=${API_KEY}&addRecipeInformation=true&number=50`
     );
     const { data } = response;
     const allDataRecipes = data.results;

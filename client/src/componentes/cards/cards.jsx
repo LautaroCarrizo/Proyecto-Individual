@@ -1,14 +1,12 @@
-import { useSelector } from "react-redux";
 import "./cards.css";
 import Card from "../card/cardd";
 
-function Cards() {
-  const allRecipes = useSelector((state) => state.allRecipes);
-  //console.log("CARDSSSSS LLEGO!!", allRecipes)  
+function Cards(props) {
+  const {recipes} = props
   return (
     <div className="conteinerCards">
       <div className="containerBox">
-        {allRecipes.alldata?.map((recipe) => {
+        {recipes?.map((recipe) => {
           return <Card recipe={recipe} key={recipe.id} />;
         })}
       </div>

@@ -21,10 +21,10 @@ export const CLEAR = "CLEAR";
 
 //? ACTIONS
 
-export const getAllRecipes = (page = 1) => {
+export const getAllRecipes = () => {
   return async (dispatch) => {
     try {
-      const endpoint = `http://localhost:3001/?page=${page}`;
+      const endpoint = `http://localhost:3001/`;
       const response = await axios.get(endpoint);
       const allRecipes = response.data;
       dispatch(getAllRecipesSuccess(allRecipes));
@@ -52,7 +52,6 @@ export const getDetailRecipes = (id) => {
   };
 };
 export const getDetailSuccess = (detail) => {
-  console.log(detail)
   return { type: REQUETS_DETAIL_RECIPES_SUCCESS, payload: detail };
 };
 export const getDetailFailure = (error) => {
@@ -82,7 +81,6 @@ export const onClose = (id, recipes) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(endpoint, { id, recipes });
-      //console.log(data)
       return dispatch({
         type: ON_CLOSE,
         payload: data,
@@ -98,6 +96,7 @@ export const orderByName = (order, allRecipes) => {
       const endpoint = "http://localhost:3001/order";
       const { data } = await axios.post(endpoint, { order, allRecipes });
       const orderName = data;
+      console.log(orderName)
       dispatch(orderByNameSuccess(orderName));
     } catch (error) {
       dispatch(orderByNameFailure(error.message));
@@ -116,6 +115,7 @@ export const orderByHealth = (order, allRecipes) => {
       const endpoint = "http://localhost:3001/order/healthscore";
       const { data } = await axios.post(endpoint, { order, allRecipes });
       const orderHealth = data;
+      console.log(orderHealth)
       dispatch(orderByHealthSuccess(orderHealth));
     } catch (error) {
       dispatch(orderByHealthFailure(error.message));
@@ -134,6 +134,7 @@ export const filterByDiet = (nameDiet, allRecipes) => {
       const endpoint = "http://localhost:3001/filter/diets";
       const { data } = await axios.post(endpoint, { nameDiet, allRecipes });
       const filterDiet = data;
+      console.log(filterByDiet)
       dispatch(filterByDietSucces(filterDiet));
     } catch (error) {
       dispatch(filterByDietFailure(error.message));
@@ -146,12 +147,13 @@ export const filterByDietSucces = (filterDiet) => {
 export const filterByDietFailure = (error) => {
   return { type: FILTER_BY_DIET_FAILURE, payload: { error } };
 };
-export const filterByRecipe = (recipesBase, allRecipes) => {
+export const filterByRecipe = (allRecipes) => {
   return async (dispatch) => {
     try {
       const endpoint = "http://localhost:3001/filter/recipes";
-      const { data } = await axios.post(endpoint, { recipesBase, allRecipes });
+      const { data } = await axios.post(endpoint, { allRecipes });
       const filterRecipes = data;
+      console.log(filterRecipes)
       dispatch(filterByRecipeSucces(filterRecipes));
     } catch (error) {
       dispatch(filterByRecipeFailure(error.message));
