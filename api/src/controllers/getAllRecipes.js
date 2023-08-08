@@ -36,7 +36,7 @@ async function getAllRecipes(req, res) {
         }),
       };
     });
-    return res.status(200).json({ message: "Realizado", alldata: filtroData });
+    return res.status(200).json({alldata: filtroData });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: error.message });
@@ -45,15 +45,3 @@ async function getAllRecipes(req, res) {
 
 module.exports = getAllRecipes;
 
-// [
-//   'gluten free',
-//   'dairy free',
-//   'lacto ovo vegetarian',
-//   'vegan',
-//   'paleolithic',
-//   'primal',
-//   'whole 30',
-//   'pescatarian',
-//   'ketogenic',
-//   'fodmap friendly'
-// ]

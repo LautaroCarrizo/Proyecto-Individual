@@ -15,7 +15,7 @@ import { ON_CLOSE, CLEAR } from "./actions";
 
 const initialState = {
   allRecipes: [],
-  detail: null,
+  detail: [],
   errors: {
     getAllRecipesError: null,
     getDetailError: null,
@@ -28,6 +28,7 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
+  console.log(action);
   switch (action.type) {
     case REQUETS_ALL_RECIPES_SUCCESS:
       return {
@@ -50,6 +51,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         errors: { ...state.errors, getDetailError: action.payload },
+      };
+    case ON_CLOSE:
+      console.log("Data received after onClose:", action.payload);
+      return {
+        ...state,
+        allRecipes: action.payload,
       };
     case SEARCH_BY_NAME_SUCCES:
       return {
@@ -105,11 +112,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         errors: { ...state.errors, filterByRecipeError: action.payload },
-      };
-    case ON_CLOSE:
-      return {
-        ...state,
-        allRecipes: action.payload,
       };
     case CLEAR:
       return initialState;

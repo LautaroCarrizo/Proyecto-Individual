@@ -44,7 +44,7 @@ export const getDetailRecipes = (id) => {
     try {
       const endpoint = `http://localhost:3001/recipes/${id}`;
       const response = await axios.get(endpoint);
-      const detail = response.data;
+      const detail = response.data.recipe;
       dispatch(getDetailSuccess(detail));
     } catch (error) {
       dispatch(getDetailFailure(error.message));
@@ -52,6 +52,7 @@ export const getDetailRecipes = (id) => {
   };
 };
 export const getDetailSuccess = (detail) => {
+  console.log(detail)
   return { type: REQUETS_DETAIL_RECIPES_SUCCESS, payload: detail };
 };
 export const getDetailFailure = (error) => {
@@ -81,6 +82,7 @@ export const onClose = (id, recipes) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(endpoint, { id, recipes });
+      //console.log(data)
       return dispatch({
         type: ON_CLOSE,
         payload: data,

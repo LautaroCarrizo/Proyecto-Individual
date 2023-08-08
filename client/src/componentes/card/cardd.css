@@ -1,0 +1,25 @@
+.card{
+    display: flex;
+    flex-direction: column;
+   margin: 1rem;
+   padding: 1rem 1rem;
+   width: 400px;
+   height: 500px;
+   background: rgb(222, 251, 128);
+}
+
+.card h1{
+ height: 10vh;
+ text-align: center;
+ font-size: 1.2rem;
+ font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ letter-spacing: 2px;
+
+}
+.containerList {
+ font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ list-style: none;
+ text-align: left;
+ font-size: 18px;
+ letter-spacing: 2px;
+}
