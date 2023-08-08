@@ -1,19 +1,18 @@
 import { useSelector } from "react-redux";
 import "./cards.css";
-import React, { useState } from "react";
 import Card from "../card/cardd";
 
 function Cards() {
   const allRecipes = useSelector((state) => state.allRecipes);
-  const [prueba, setPrueba] = useState(false)
+  //console.log("CARDSSSSS LLEGO!!", allRecipes)  
   return (
     <div className="conteinerCards">
-    <div className="containerBox">
-  {allRecipes.alldata?.map((recipe) => 
-   <Card recipe = {recipe} key={recipe.id} setPrueba= {setPrueba} prueba= {prueba} />
-  )}
+      <div className="containerBox">
+        {allRecipes.alldata?.map((recipe) => {
+          return <Card recipe={recipe} key={recipe.id} />;
+        })}
+      </div>
     </div>
-  </div>      
   );
 }
 

@@ -8,12 +8,12 @@ import { useDispatch } from "react-redux";
 export default function Home() {
   const dispatch = useDispatch();
 
-
   useEffect(() => {
       dispatch(getAllRecipes());
   }, [dispatch]);
- 
 
+  
+ 
   return (
     <div className="containerHome">
       <div className="containerTitulo">
@@ -22,6 +22,9 @@ export default function Home() {
       <div>
         <Cards  />
       </div>
+
+      <button> avanzar </button>
+      <button> retroceder </button>
     </div>
   );
 }

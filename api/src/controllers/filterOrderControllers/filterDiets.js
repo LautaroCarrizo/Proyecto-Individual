@@ -13,7 +13,7 @@ async function filterDiets(req, res) {
             recipe.diets.some(elem => elem === dietName)
         );
 
-        res.status(200).json(filteredRecipes);
+        res.status(200).json({alldata: filteredRecipes});
     } catch (error) {
         res.status(500).json({ error: 'Error filtering recipes' });
     }

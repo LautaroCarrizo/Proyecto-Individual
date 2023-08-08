@@ -5,12 +5,11 @@ import React from "react";
 
 function Card(props) {
   const dispatch = useDispatch()
-  const {setPrueba, prueba} = props
   const allRecipes = useSelector((state) => state.allRecipes);
   const { id, name, image, diets } = props.recipe;
   const {alldata} = allRecipes
+  
   const handleClose = () => {
-     setPrueba(!prueba)
       dispatch(onClose(id, alldata));
   };
 

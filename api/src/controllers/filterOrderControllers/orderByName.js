@@ -5,7 +5,7 @@ function orderRecipes(req, res) {
           ? allRecipes.sort((a, b) => a.name.localeCompare(b.name))
           : allRecipes.sort((a, b) => b.name.localeCompare(a.name));
       
-        res.status(200).json(recipes);
+        res.status(200).json({alldata: recipes});
     } catch (error) {
         return res.status(404).json({error: error.message})
     }

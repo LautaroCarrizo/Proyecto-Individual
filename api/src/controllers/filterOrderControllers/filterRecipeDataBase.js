@@ -11,7 +11,7 @@ async function filterRecipeDataBase(req, res) {
       return !recipesFromDB.some(dbRecipe => dbRecipe.id === recipe.id);
     });
     
-    res.status(200).json(recipesNotInDB);
+    res.status(200).json({alldata: recipesNotInDB});
   } catch (error) {
     res.status(500).json({ error: 'Error filtering recipes' });
   }

@@ -5,10 +5,6 @@ const { API_KEY } = process.env;
 //Function
 async function getAllRecipes(req, res) {
   try {
-    const page = req.query.page || 1; 
-    const recipesPerPage = 9;
-    const startIdx = (page - 1) * recipesPerPage;
-
     const response = await axios.get(
       `${URL}?apiKey=${API_KEY}&addRecipeInformation=true&number=${recipesPerPage}&offset=${startIdx}`
     );
