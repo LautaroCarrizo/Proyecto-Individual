@@ -19,7 +19,7 @@ router.post("/onclose", onClose);
 router.post("/filter/diets", filterDiets);
 router.post("/filter/recipes", filterRecipeDataBase);
 router.post("/order", orderRecipesByName)
-router.post("/order/healthscore", orderRecipesByHealth)
+router.post("/healthscore", orderRecipesByHealth)
 router.get("/", getAllRecipes);
 router.get("/recipes/:idRecipe", getRecipeById);
 router.get("/recipes", getRecipeByName);

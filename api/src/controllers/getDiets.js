@@ -4,13 +4,9 @@ const { API_KEY } = process.env;
 const URL = `https://api.spoonacular.com/recipes/complexSearch`;
 
 async function getDiets(req, res) {
-  const start =400; // Primer elemento que deseas obtener
-  const end = 500; // Último elemento que deseas obtener
-  const batchSize = end - start + 1; // Tamaño del lote
-
   try {
     const response = await axios.get(
-      `${URL}?apiKey=${API_KEY}&addRecipeInformation=true&offset=${start}&number=${batchSize}`
+      `${URL}?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
     );
     const { data } = response;
     const allDataRecipes = data.results;

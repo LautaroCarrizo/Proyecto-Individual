@@ -6,18 +6,20 @@ export const REQUETS_ALL_RECIPES_SUCCESS = "REQUETS_ALL_RECIPES_SUCCESS";
 export const REQUETS_ALL_RECIPES_FAILURE = "REQUETS_ALL_RECIPES_FAILURE";
 export const REQUETS_DETAIL_RECIPES_SUCCESS = "REQUETS_DETAIL_RECIPES_SUCCESS";
 export const REQUETS_DETAIL_RECIPES_FAILURE = "REQUETS_DETAIL_RECIPES_FAILURE";
-export const SEARCH_BY_NAME_SUCCES = "SEARCH_BY_NAME_SUCCES";
+export const SEARCH_BY_NAME_SUCCESS = "SEARCH_BY_NAME_SUCCESS";
 export const SEARCH_BY_NAME_FAILURE = "SEARCH_BY_NAME_FAILURE";
 export const ON_CLOSE = "ON_CLOSE";
-export const ORDER_BY_NAME_SUCCES = "ORDER_BY_NAME_SUCCES";
+export const ORDER_BY_NAME_SUCCESS = "ORDER_BY_NAME_SUCCESS";
 export const ORDER_BY_NAME_FAILURE = "ORDER_BY_NAME_FAILURE";
-export const ORDER_BY_HEALTH_SUCCES = "ORDER_BY_HEALTH_SUCCES";
+export const ORDER_BY_HEALTH_SUCCESS = "ORDER_BY_HEALTH_SUCCESS";
 export const ORDER_BY_HEALTH_FAILURE = "ORDER_BY_HEALTH_FAILURE";
-export const FILTER_BY_DIET_SUCCES = "FILTER_BY_DIET_SUCCES";
+export const FILTER_BY_DIET_SUCCESS = "FILTER_BY_DIET_SUCCESS";
 export const FILTER_BY_DIET_FAILURE = "FILTER_BY_DIET_FAILURE";
-export const FILTER_BY_RECIPE_SUCCES = "FILTER_BY_RECIPE_FAILURE";
+export const FILTER_BY_RECIPE_SUCCESS = "FILTER_BY_RECIPE_FAILURE";
 export const FILTER_BY_RECIPE_FAILURE = "FILTER_BY_RECIPE_FAILURE";
 export const CLEAR = "CLEAR";
+
+
 
 //? ACTIONS
 
@@ -70,7 +72,7 @@ export const searchByName = (name) => {
   };
 };
 export const searchByNameSuccess = (recipeName) => {
-  return { type: SEARCH_BY_NAME_SUCCES, payload: recipeName };
+  return { type: SEARCH_BY_NAME_SUCCESS, payload: recipeName };
 };
 export const searchByNameFailure = (error) => {
   return { type: SEARCH_BY_NAME_FAILURE, payload: { error } };
@@ -90,13 +92,14 @@ export const onClose = (id, recipes) => {
     }
   };
 };
+
 export const orderByName = (order, allRecipes) => {
   return async (dispatch) => {
     try {
+      console.log("LEEGAAAAAA", allRecipes)
       const endpoint = "http://localhost:3001/order";
       const { data } = await axios.post(endpoint, { order, allRecipes });
       const orderName = data;
-      console.log(orderName)
       dispatch(orderByNameSuccess(orderName));
     } catch (error) {
       dispatch(orderByNameFailure(error.message));
@@ -104,7 +107,7 @@ export const orderByName = (order, allRecipes) => {
   };
 };
 export const orderByNameSuccess = (orderName) => {
-  return { type: ORDER_BY_NAME_SUCCES, payload: orderName };
+  return { type: ORDER_BY_NAME_SUCCESS, payload: orderName };
 };
 export const orderByNameFailure = (error) => {
   return { type: ORDER_BY_NAME_FAILURE, payload: { error } };
@@ -112,10 +115,10 @@ export const orderByNameFailure = (error) => {
 export const orderByHealth = (order, allRecipes) => {
   return async (dispatch) => {
     try {
-      const endpoint = "http://localhost:3001/order/healthscore";
+      const endpoint = "http://localhost:3001/healthscore";
       const { data } = await axios.post(endpoint, { order, allRecipes });
       const orderHealth = data;
-      console.log(orderHealth)
+      console.log(orderHealth, endpoint)
       dispatch(orderByHealthSuccess(orderHealth));
     } catch (error) {
       dispatch(orderByHealthFailure(error.message));
@@ -123,45 +126,45 @@ export const orderByHealth = (order, allRecipes) => {
   };
 };
 export const orderByHealthSuccess = (orderHealth) => {
-  return { type: ORDER_BY_HEALTH_SUCCES, payload: orderHealth };
+  return { type: ORDER_BY_HEALTH_SUCCESS, payload: orderHealth };
 };
 export const orderByHealthFailure = (error) => {
   return { type: ORDER_BY_HEALTH_FAILURE, payload: { error } };
 };
-export const filterByDiet = (nameDiet, allRecipes) => {
+export const filterByDiet = (nameDiet, datosRecipes) => {
   return async (dispatch) => {
     try {
       const endpoint = "http://localhost:3001/filter/diets";
-      const { data } = await axios.post(endpoint, { nameDiet, allRecipes });
+      const { data } = await axios.post(endpoint, { nameDiet, datosRecipes });
       const filterDiet = data;
-      console.log(filterByDiet)
-      dispatch(filterByDietSucces(filterDiet));
+      console.log(filterDiet)
+      dispatch(filterByDietSuccess(filterDiet));
     } catch (error) {
       dispatch(filterByDietFailure(error.message));
     }
   };
 };
-export const filterByDietSucces = (filterDiet) => {
-  return { type: FILTER_BY_DIET_SUCCES, payload: filterDiet };
+export const filterByDietSuccess = (filterDiet) => {
+  return { type: FILTER_BY_DIET_SUCCESS, payload: filterDiet };
 };
 export const filterByDietFailure = (error) => {
   return { type: FILTER_BY_DIET_FAILURE, payload: { error } };
 };
-export const filterByRecipe = (allRecipes) => {
+export const filterByRecipe = (datosRecipes) => {
   return async (dispatch) => {
     try {
       const endpoint = "http://localhost:3001/filter/recipes";
-      const { data } = await axios.post(endpoint, { allRecipes });
+      const { data } = await axios.post(endpoint, { datosRecipes });
       const filterRecipes = data;
       console.log(filterRecipes)
-      dispatch(filterByRecipeSucces(filterRecipes));
+      dispatch(filterByRecipeSuccess(filterRecipes));
     } catch (error) {
       dispatch(filterByRecipeFailure(error.message));
     }
   };
 };
-export const filterByRecipeSucces = (filterRecipes) => {
-  return { type: FILTER_BY_RECIPE_SUCCES, payload: filterRecipes };
+export const filterByRecipeSuccess = (filterRecipes) => {
+  return { type: FILTER_BY_RECIPE_SUCCESS, payload: filterRecipes };
 };
 export const filterByRecipeFailure = (error) => {
   return { type: FILTER_BY_RECIPE_FAILURE, payload: { error } };

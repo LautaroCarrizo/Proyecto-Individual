@@ -1,11 +1,10 @@
 const { Recipe } = require("../../db");
 
 async function filterRecipeDataBase(req, res) {
-  const { allRecipes } = req.body;
-
+  const { datosRecipes } = req.body;
   try {
     const recipesFromDB = await Recipe.findAll();
-    const recipesInDB = allRecipes.filter((recipe) => {
+    const recipesInDB = datosRecipes.alldata.filter((recipe) => {
       return recipesFromDB.some((dbRecipe) => dbRecipe.id === recipe.id);
     });
 

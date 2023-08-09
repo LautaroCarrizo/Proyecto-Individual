@@ -1,21 +1,25 @@
 import {
   REQUETS_ALL_RECIPES_SUCCESS,
   REQUETS_ALL_RECIPES_FAILURE,
-} from "./actions";
-import {
   REQUETS_DETAIL_RECIPES_SUCCESS,
   REQUETS_DETAIL_RECIPES_FAILURE,
+  SEARCH_BY_NAME_SUCCESS,
+  SEARCH_BY_NAME_FAILURE,
+  ORDER_BY_NAME_SUCCESS,
+  ORDER_BY_NAME_FAILURE,
+  ORDER_BY_HEALTH_SUCCESS,
+  ORDER_BY_HEALTH_FAILURE,
+  FILTER_BY_DIET_SUCCESS,
+  FILTER_BY_DIET_FAILURE,
+  FILTER_BY_RECIPE_SUCCESS,
+  FILTER_BY_RECIPE_FAILURE,
+  ON_CLOSE,
+  CLEAR,
 } from "./actions";
-import { SEARCH_BY_NAME_SUCCES, SEARCH_BY_NAME_FAILURE } from "./actions";
-import { ORDER_BY_NAME_SUCCES, ORDER_BY_NAME_FAILURE } from "./actions";
-import { ORDER_BY_HEALTH_SUCCES, ORDER_BY_HEALTH_FAILURE } from "./actions";
-import { FILTER_BY_DIET_SUCCES, FILTER_BY_DIET_FAILURE } from "./actions";
-import { FILTER_BY_RECIPE_SUCCES, FILTER_BY_RECIPE_FAILURE } from "./actions";
-import { ON_CLOSE, CLEAR } from "./actions";
 
 const initialState = {
-  allRecipes: [],
-  detail: [],
+  allRecipes: [], //siempre rederizo este
+  datosRecipes: [], // y en este aplico los filtros
   errors: {
     getAllRecipesError: null,
     getDetailError: null,
@@ -34,6 +38,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allRecipes: action.payload,
+        datosRecipes: action.payload,
         errors: { ...state.errors, getAllRecipesError: null },
       };
     case REQUETS_ALL_RECIPES_FAILURE:
@@ -41,6 +46,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         errors: { ...state.errors, getAllRecipesError: action.payload },
       };
+ 
     case REQUETS_DETAIL_RECIPES_SUCCESS:
       return {
         ...state,
@@ -53,12 +59,12 @@ const rootReducer = (state = initialState, action) => {
         errors: { ...state.errors, getDetailError: action.payload },
       };
     case ON_CLOSE:
-      console.log("Data received after onClose:", action.payload);
       return {
         ...state,
         allRecipes: action.payload,
+        datosRecipes: action.payload
       };
-    case SEARCH_BY_NAME_SUCCES:
+    case SEARCH_BY_NAME_SUCCESS:
       return {
         ...state,
         allRecipes: action.payload,
@@ -69,7 +75,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         errors: { ...state.errors, searchByNameError: action.payload },
       };
-    case ORDER_BY_NAME_SUCCES:
+    case ORDER_BY_NAME_SUCCESS:
       return {
         ...state,
         allRecipes: action.payload,
@@ -80,7 +86,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         errors: { ...state.errors, orderByNameError: action.payload },
       };
-    case ORDER_BY_HEALTH_SUCCES:
+    case ORDER_BY_HEALTH_SUCCESS:
       return {
         ...state,
         allRecipes: action.payload,
@@ -91,7 +97,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         errors: { ...state.errors, orderByHealthError: action.payload },
       };
-    case FILTER_BY_DIET_SUCCES:
+    case FILTER_BY_DIET_SUCCESS:
       return {
         ...state,
         allRecipes: action.payload,
@@ -102,7 +108,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         errors: { ...state.errors, filterByDietError: action.payload },
       };
-    case FILTER_BY_RECIPE_SUCCES:
+    case FILTER_BY_RECIPE_SUCCESS:
       return {
         ...state,
         allRecipes: action.payload,
@@ -113,9 +119,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         errors: { ...state.errors, filterByRecipeError: action.payload },
       };
-    case CLEAR:
-      return initialState;
-
+      case CLEAR:
+        return {
+          ...initialState,
+          errors: { ...state.errors },
+        };
+      
     default:
       return state;
   }
