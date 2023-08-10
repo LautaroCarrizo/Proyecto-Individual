@@ -8,20 +8,27 @@ async function postRecipe(req, res) {
   try {
     const [newRecipe, created] = await Recipe.findOrCreate({
       where: { title },
-      defaults: { image, summary, healthScore, steps, diets },
+      defaults: { image, summary, healthScore, steps },
     });
     console.log(newRecipe);
     if (Array.isArray(diets) && diets.length > 0) {
       const dietObjs = await Diets.findAll({
-        where: { name: { [Op.in]: diets } },
+        where: { id: diets },
       });
+      console.log(dietObjs)
       await newRecipe.setDiets(dietObjs);
     }
-    const allRecipes = await Recipe.findAll();
-    console.log(allRecipes);
+    const allRecipes = await Recipe.findByPk(newRecipe.id, {
+      include: {
+        model: Diets, 
+        as: "diets",
+        through: {attributes:[]}
+      }
+    });
+   
     return res
       .status(200)
-      .json({ message: "Created", newOne: newRecipe, data: allRecipes });
+      .json({ message: "Created", data: allRecipes });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });

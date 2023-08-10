@@ -1,15 +1,18 @@
 const axios = require("axios");
 const URL = `https://api.spoonacular.com/recipes/complexSearch`;
 const { API_KEY } = process.env;
-
+const handlerRecipes = require("../controllers/handlerBackApp/handlerRecipes")
 //Function
 async function getAllRecipes(req, res) {
   try {
-    const response = await axios.get(
-      `${URL}?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
-    );
-    const { data } = response;
-    const allDataRecipes = data.results;
+    // const response = await axios.get(
+    //   `${URL}?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
+    // );
+    const results =  await handlerRecipes()
+    console.log(results)
+    //const { data } = response;
+    //const allDataRecipes = data.results;
+    const allDataRecipes = results;
     let filtroData = allDataRecipes.map((recipe) => {
       return {
         name: recipe.title,

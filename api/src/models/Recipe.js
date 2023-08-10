@@ -4,9 +4,14 @@ module.exports = (sequelize) => {
   sequelize.define('recipe', {
     id: {
       type: DataTypes.INTEGER,
-      autoIncrement: true,
+      //defaultValue: DataTypes.UUIDV4, 
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true
+      // type: DataTypes.UUID,
+      // defaultValue: DataTypes.UUIDV4, 
+      // allowNull: false,
+      // primaryKey: true,
     },
     title: { // Cambiar 'name' por 'title'
       type: DataTypes.STRING,
@@ -14,7 +19,7 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     summary: {
       type: DataTypes.STRING,
@@ -28,5 +33,5 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-  });
+  }, {timestamps: false});
 };
