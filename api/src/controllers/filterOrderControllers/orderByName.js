@@ -6,7 +6,7 @@ function orderRecipesByName(req, res) {
     recipes.sort((a, b) => {
       if (order === "A") {
         return a.name.localeCompare(b.name);
-      } else if (order === "D") {
+      } else {
         return b.name.localeCompare(a.name);
       }
       return 0;
