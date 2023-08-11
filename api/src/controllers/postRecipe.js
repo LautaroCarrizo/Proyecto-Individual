@@ -1,34 +1,83 @@
 const { Recipe, Diets } = require("../db");
 const { Op } = require("sequelize");
+const numberRegex = /\d/;
 
 async function postRecipe(req, res) {
-  const { title, image, summary, healthScore, steps, diets } = req.body;
-  if (!title || !summary || !healthScore || !diets)
-    return res.status(401).send("Faltan datos");
+
+  const { name, image, summary, healthScore, steps, diets } = req.body
+
+  if (!name || !diets) return res.status(401).send("Faltan datos");
+
+  if (!name) {
+    return res
+      .status(401)
+      .json({message: "Datos incorrectos, Es obligatorio ingresar el nombre"});
+  }
+  if (numberRegex.test(name)) {
+    return res
+      .status(401)
+      .json({message: "Datos incorrectos, El nombre no puede contener números"});
+  }
+
+  if (name && name.length <= 4) {
+    return res
+      .status(401)
+      .json( {message: "Datos incorrectos, El nombre debe tener más de 4 caracteres"});
+  }
+
+  if (summary && !(summary.length <= 180)) {
+    return res
+      .status(401)
+      .json({message:  "Datos incorrectos, Solo puedes escribir 180 caracteres"});
+  }
+
+  if (
+    typeof healthScore !== "undefined" &&
+    (healthScore < 0 || healthScore > 100)
+  ) {
+    return res
+      .status(401)
+      .json({message:  "Datos incorrectos, Solo puedes puntuar con números 0 a 100"});
+  }
+
+  if (steps && !(steps.length <= 180)) {
+    return res
+      .status(401)
+      .json({message: "Datos incorrectos, Solo puedes escribir 180 caracteres"});
+  }
+
+  if (!diets || diets.length === 0) {
+    return res
+      .status(401)
+      .json({message: "Datos incorrectos, Debes seleccionar al menos 1 dieta"});
+  }
+
   try {
     const [newRecipe, created] = await Recipe.findOrCreate({
-      where: { title },
+      where: { name },
       defaults: { image, summary, healthScore, steps },
     });
-    console.log(newRecipe);
+
     if (Array.isArray(diets) && diets.length > 0) {
       const dietObjs = await Diets.findAll({
-        where: { id: diets },
+        where: {
+          name: {
+            [Op.in]: diets,
+          },
+        },
       });
-      console.log(dietObjs)
+
       await newRecipe.setDiets(dietObjs);
     }
-    const allRecipes = await Recipe.findByPk(newRecipe.id, {
+    const recipe = await Recipe.findByPk(newRecipe.id, {
       include: {
-        model: Diets, 
+        model: Diets,
         as: "diets",
-        through: {attributes:[]}
-      }
+        through: { attributes: [] },
+      },
     });
-   
-    return res
-      .status(200)
-      .json({ message: "Created", data: allRecipes });
+
+    return res.status(200).json({ message: "Created", data: recipe });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });

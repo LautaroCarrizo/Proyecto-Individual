@@ -33,15 +33,18 @@ export default function Home() {
       setCurrentPage((page) => page - 1);
     }
   };
-
+const handlerFilterOrders = () => {
+  setCurrentPage(1)
+}
+   
   return (
     <div className="containerHome">
       <div className="containerTitulo">
         <h1>Recipes</h1>
-        <div>
-        <FiltersOrders/>
-        </div>
       </div>
+        <div className="contaienerFiltros">
+        <FiltersOrders pageFiltersOrders={handlerFilterOrders} />
+        </div>
       <div>
         <Cards recipes={recipesToShow} />
       </div>

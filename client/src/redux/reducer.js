@@ -28,6 +28,7 @@ const initialState = {
     orderByHealthError: null,
     filterByDietError: null,
     filterByRecipeError: null,
+    postRecipesError: null,
   },
 };
 
@@ -46,7 +47,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         errors: { ...state.errors, getAllRecipesError: action.payload },
       };
- 
+
     case REQUETS_DETAIL_RECIPES_SUCCESS:
       return {
         ...state,
@@ -62,7 +63,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allRecipes: action.payload,
-        datosRecipes: action.payload
       };
     case SEARCH_BY_NAME_SUCCESS:
       return {
@@ -108,7 +108,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         errors: { ...state.errors, filterByDietError: action.payload },
       };
-    case FILTER_BY_RECIPE_SUCCESS:
+    case  FILTER_BY_RECIPE_SUCCESS:
       return {
         ...state,
         allRecipes: action.payload,
@@ -119,12 +119,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         errors: { ...state.errors, filterByRecipeError: action.payload },
       };
-      case CLEAR:
-        return {
-          ...initialState,
-          errors: { ...state.errors },
-        };
-      
+    case CLEAR:
+      return {
+        ...state,
+        allRecipes: state.datosRecipes,
+      };
+
     default:
       return state;
   }

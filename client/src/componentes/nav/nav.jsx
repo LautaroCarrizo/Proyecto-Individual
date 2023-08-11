@@ -12,7 +12,7 @@ export default function Nav () {
             <NavLink style={{ textDecoration: "none" }} to="/home"> Home </NavLink>
         </button>
         <button className= "btn1">
-            <NavLink style={{ textDecoration: "none" }} to="/form"> Formulario </NavLink>
+            <NavLink style={{ textDecoration: "none" }} to="/form"> Cook </NavLink>
         </button>
         <button className= "btn1">
             <NavLink style={{ textDecoration: "none" }} to="/Favorites"> Favorites </NavLink>

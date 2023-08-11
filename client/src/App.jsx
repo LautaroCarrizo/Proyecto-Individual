@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import Landing from "./componentes/landing/landing";
 import Nav from "./componentes/nav/nav";
  import Home from "./componentes/home/home";
+ import Form from "./componentes/form/formRecipe"
 import Footer from "./componentes/footer/footer";
 import ErrorHandler from "./componentes/errors/error";
 function App() {
@@ -16,9 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />}></Route>
          <Route path="/home" element={<Home />}></Route> 
-        {/* <Route path="/Abaout" element={<Abaout />}></Route>
-        <Route path="/detail/:id" element={<Details />}></Route>
-        <Route path="/favorites" element={<Favorites />}></Route> */}
+        <Route path="/form" element={<Form/>}></Route>
       </Routes>
       {ubi.pathname !== "/" && <Footer />}
     </div>
