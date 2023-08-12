@@ -3,10 +3,17 @@ const URL = `https://api.spoonacular.com/recipes/complexSearch`;
 const { API_KEY } = process.env;
 const { Recipe } = require("../db");
 const { Diets } = require("../db");
-const handlerRecipes = require("../controllers/handlerBackApp/handlerRecipes")
-//Function
+const handlerRecipes = require("../controllers/handlerBackApp/handlerRecipes");
+
 async function getAllRecipes(req, res) {
   try {
+    // const response = await axios.get(
+    //   `${URL}?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
+    // );
+    //const { data } = response;
+    //const allDataRecipes = data.results;
+    const results = await handlerRecipes();
+
     const recipesFromDB = await Recipe.findAll({
       attributes: ["id", "name", "image"],
       include: {
@@ -14,33 +21,47 @@ async function getAllRecipes(req, res) {
         attributes: ["name"],
       },
     });
-    // const response = await axios.get(
-    //   `${URL}?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
-    // );
-    const results = await handlerRecipes();
 
-    //const { data } = response;
-    //const allDataRecipes = data.results;
-    const allDataRecipes = [...recipesFromDB, ...results];
-    console.log(allDataRecipes);
+    const recipesFromDBMapped = recipesFromDB.map((recipe) => {
+      const mappedDiets = recipe.dataValues.diets
+        ? recipe.dataValues.diets.map((diet) => diet.name)
+        : [];
 
-    let filtroData = allDataRecipes.map((recipe) => {
+      return {
+        id: recipe.id,
+        name: recipe.name,
+        image: recipe.image,
+        diets: mappedDiets,
+        healthScore: recipe.healthScore,
+      };
+    });
+
+    const apiRecipesMapped = results?.map((recipe) => {
       return {
         id: recipe.id,
         name: recipe.title,
         image: recipe.image,
         diets: recipe.diets,
-        healthScore: recipe.healthScore
+        healthScore: recipe.healthScore,
+      };
+    });
+
+    const allDataRecipes = [...recipesFromDBMapped, ...apiRecipesMapped];
+
+    const filtroData = allDataRecipes.map((recipe) => {
+      return {
+        id: recipe.id,
+        name: recipe.name,
+        image: recipe.image,
+        diets: recipe.diets,
+        healthScore: recipe.healthScore,
       };
     });
 
     return res.status(200).json({ alldata: filtroData });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: error.message });
   }
 }
 
-
 module.exports = getAllRecipes;
-

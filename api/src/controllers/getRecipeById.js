@@ -5,11 +5,9 @@ const { API_KEY } = process.env;
 
 async function getRecipeById(req, res) {
   const { idRecipe } = req.params;
+  let recipeSend = "";
   try {
-    const dataBaseRecipeId = await Recipe.findByPk(idRecipe);
-    if (dataBaseRecipeId) {
-      return res.status(200).json(dataBaseRecipeId);
-    } else {
+    if (Number(idRecipe)) {
       const response = await axios.get(
         `${URL}/${idRecipe}/information?apiKey=${API_KEY}`
       );
@@ -29,13 +27,25 @@ async function getRecipeById(req, res) {
           }),
           diets: data.diets,
         };
-        return res.json({ message: "encontrado", recipe });
+        recipeSend = recipe
+        console.log("FROM APIIIII", recipeSend)
+        return res.json({ message: "encontrado", recipeSend });
+      } else {
+        return res.status(404).json({ message: "Not Found" });
+      }
+    } else {
+      const dataBaseRecipeId = await Recipe.findByPk(idRecipe);
+      const recipesDB = dataBaseRecipeId.dataValues
+      recipeSend = recipesDB
+      console.log("FROM DATA BASE", recipeSend)
+      if (recipesDB) {
+        console.log(recipesDB)
+        return res.status(200).json( {recipeSend} );
       } else {
         return res.status(404).json({ message: "Not Found" });
       }
     }
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: error.message });
   }
 }

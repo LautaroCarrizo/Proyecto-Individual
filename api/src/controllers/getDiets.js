@@ -26,7 +26,6 @@ async function getDiets(req, res) {
     const allDiets = await Diets.findAll();
     res.status(200).json({ data: allDiets });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error: error.message });
   }
 }

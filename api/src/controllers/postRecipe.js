@@ -6,6 +6,7 @@ async function postRecipe(req, res) {
 
   const { name, image, summary, healthScore, steps, diets } = req.body
 
+  
   if (!name || !diets) return res.status(401).send("Faltan datos");
 
   if (!name) {
@@ -57,7 +58,7 @@ async function postRecipe(req, res) {
       where: { name },
       defaults: { image, summary, healthScore, steps },
     });
-
+   
     if (Array.isArray(diets) && diets.length > 0) {
       const dietObjs = await Diets.findAll({
         where: {
@@ -66,7 +67,7 @@ async function postRecipe(req, res) {
           },
         },
       });
-
+      
       await newRecipe.setDiets(dietObjs);
     }
     const recipe = await Recipe.findByPk(newRecipe.id, {
@@ -76,10 +77,10 @@ async function postRecipe(req, res) {
         through: { attributes: [] },
       },
     });
-
+   
     return res.status(200).json({ message: "Created", data: recipe });
   } catch (error) {
-    console.log(error);
+
     res.status(500).json({ error: error.message });
   }
 }
