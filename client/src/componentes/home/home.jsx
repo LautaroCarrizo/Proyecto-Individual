@@ -5,14 +5,13 @@ import Cards from "../cards/cards";
 import { getAllRecipes } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersOrders from "../filters/filtersOrders";
-
+import SearchBar from "../serachBar/searchBar";
 export default function Home() {
   const dispatch = useDispatch();
 
   const allRecipes = useSelector((state) => state.allRecipes);
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesToShow, setRecipesToShow] = useState([]);
-
   useEffect(() => {
     dispatch(getAllRecipes());
   }, [dispatch]);
@@ -33,18 +32,21 @@ export default function Home() {
       setCurrentPage((page) => page - 1);
     }
   };
-const handlerFilterOrders = () => {
-  setCurrentPage(1)
-}
-   
+  const handlerFilterOrders = () => {
+    setCurrentPage(1);
+  };
+
   return (
     <div className="containerHome">
       <div className="containerTitulo">
         <h1>Recipes</h1>
       </div>
-        <div className="contaienerFiltros">
+      <div className="contaienerFiltros">
         <FiltersOrders pageFiltersOrders={handlerFilterOrders} />
-        </div>
+      </div>
+      <div className="containerBar">
+        <SearchBar />
+      </div>
       <div>
         <Cards recipes={recipesToShow} />
       </div>

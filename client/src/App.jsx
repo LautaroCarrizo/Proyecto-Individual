@@ -6,6 +6,7 @@ import Landing from "./componentes/landing/landing";
 import Nav from "./componentes/nav/nav";
  import Home from "./componentes/home/home";
  import Form from "./componentes/form/formRecipe"
+ import Detail from "./componentes/detail/detail"
 import Footer from "./componentes/footer/footer";
 import ErrorHandler from "./componentes/errors/error";
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Landing />}></Route>
          <Route path="/home" element={<Home />}></Route> 
         <Route path="/form" element={<Form/>}></Route>
+        <Route path="/detail/:id" element={<Detail />}></Route>
       </Routes>
       {ubi.pathname !== "/" && <Footer />}
     </div>

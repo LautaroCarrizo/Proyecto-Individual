@@ -1,24 +1,16 @@
-//import React from "react";
+import React from "react";
 import "./landing.css";
-import { useNavigate } from "react-router-dom";
-// import { useEffect, useState } from "react";
-// import {useNavigate} from "react-router-dom"
+import Login from "../login/formLogin";
 
 export default function Landing() {
-   const navigate = useNavigate()
-
-  const handlerNavigate = () => {
-    navigate("/home")
-  }
-
 
    return (
      <div className="containerLanding">
        <div className="containerTitle">
          <h1>Proyecto Individual Food</h1>
-         <p className="textHenry">Este Proyecto Individual ha sido creado por Lautaro Carrizo, un alumno de la academia en línea SoyHenry, con el propósito de poner en práctica los conocimientos adquiridos durante el bootcamp.</p>         <div className="containerButton">
-           <button onClick={handlerNavigate}>Cook</button>
-         </div>
+        <div className="containerLogin">
+          <Login/>
+          </div>          
        <div className="containerIcons">
            <a className="icono"
              href="https://github.com/LautaroCarrizo/Proyecto-Individual"

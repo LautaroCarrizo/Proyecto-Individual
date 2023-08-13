@@ -27,7 +27,7 @@ async function getRecipeByName(req, res) {
       };
      })
 
-      return response ? res.status(200).json({alldata: dataName}) : res.status(404).json({ message: "Not found" });
+      return response.data.results.length ? res.status(200).json({alldata: dataName}) : res.status(404).json({ message: "Not found" });
     }
   } catch (error) {
     return res.status(500).json({ message: error.message });

@@ -21,33 +21,39 @@ export default function FormRecipe() {
     if (Object.keys(validationErrors).length > 0) {
       setError(validationErrors);
     } else {
-       dispatch(postRecipeAction(recipe));
+      dispatch(postRecipeAction(recipe));
     }
   }
 
   function handleChange(event) {
-    const {name, value} = event.target;
-    let parsedValue = value
-    if(name === "healthScore") {
-      parsedValue = parseFloat(value)
+    const { name, value } = event.target;
+    let parsedValue = value;
+    if (name === "healthScore") {
+      parsedValue = parseFloat(value);
     } else {
-      parsedValue = value
+      parsedValue = value;
     }
-    const valueUpdate = { ...recipe, [name]: parsedValue }
-    setRecipe(valueUpdate); 
-    console.log(valueUpdate)
-    setError(
-      validation(valueUpdate)
-      ); 
-    }
+    
+    const updatedRecipe = { ...recipe, [name]: parsedValue };
+  
+    setRecipe(updatedRecipe);
+    setError(validation(updatedRecipe));
+  }
   
     function handlerChangeDiets(event) {
       const { value } = event.target;
-      const valueUpdate = recipe.diets.includes(value)
-        ? { ...recipe, diets: recipe.diets.filter((d) => d !== value) }
-        : { ...recipe, diets: [...recipe.diets, value] };
-      setRecipe(valueUpdate);
-      setError(validation(valueUpdate));
+      console.log(value)
+      const updatedDiets = recipe.diets.includes(value)
+      ? recipe.diets.filter((d) => d !== value)
+      : [...recipe.diets, value];
+  
+    const updatedRecipe = { ...recipe, diets: updatedDiets };
+  
+    console.log("SOY RECIPE", recipe);
+    console.log(updatedRecipe);
+  
+    setRecipe(updatedRecipe);
+      setError(validation(updatedRecipe));
     }
   
   return (

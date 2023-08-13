@@ -9,7 +9,7 @@ function orderRecipesByName(req, res) {
       } else {
         return b.name.localeCompare(a.name);
       }
-      return 0;
+  
     });
     console.log("ordenameee", allRecipes)
     res.status(200).json({ alldata: recipes });

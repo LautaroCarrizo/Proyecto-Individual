@@ -1,8 +1,12 @@
 import "./nav.css"
-
+import { logout } from "../../redux/actions"
 import {NavLink} from "react-router-dom"
-
+import { useDispatch } from "react-redux"
 export default function Nav () {
+const dispatch = useDispatch()
+ const handlerLogOut = () =>{
+    dispatch(logout())
+ }
 
     return (
         <nav className="containerNav">
@@ -14,8 +18,8 @@ export default function Nav () {
         <button className= "btn1">
             <NavLink style={{ textDecoration: "none" }} to="/form"> Cook </NavLink>
         </button>
-        <button className= "btn1">
-            <NavLink style={{ textDecoration: "none" }} to="/Favorites"> Favorites </NavLink>
+        <button onClick={handlerLogOut} className= "btn1">
+            <NavLink style={{ textDecoration: "none" }} to="/"> LogOut </NavLink>
         </button>
         </div>
     </nav>

@@ -1,4 +1,6 @@
 const { Router } = require("express");
+const postUser = require("../controllers/postUser")
+const loginUser = require("../controllers/loginUser")
 const getRecipeById = require("../controllers/getRecipeById");
 const getRecipeByName = require("../controllers/getRecipeByName");
 const getDiets = require("../controllers/getDiets");
@@ -20,6 +22,8 @@ router.post("/filter/diets", filterDiets);
 router.post("/filter/recipes", filterRecipeDataBase);
 router.post("/order", orderRecipesByName)
 router.post("/healthscore", orderRecipesByHealth)
+router.post("/register", postUser)
+router.post("/login", loginUser)
 router.get("/", getAllRecipes);
 router.get("/recipes/:idRecipe", getRecipeById);
 router.get("/recipes", getRecipeByName);
