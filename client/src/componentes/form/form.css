@@ -46,7 +46,14 @@
     width: 6rem;
     height: 4vh;
 }
-
+.containerImg{
+width: 20%;
+height: 20vh;
+}
+.imgForm{
+  width: 300px;
+  height: 400px;
+}
 .errors{
     display: flex;
     justify-content: center;

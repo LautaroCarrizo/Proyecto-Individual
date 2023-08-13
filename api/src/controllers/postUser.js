@@ -33,7 +33,7 @@ async function postUser(req, res) {
         email: email,
         password: password,
       });
-       res.status(200).json({ newUser: newUser });
+       res.status(200).json({ message: "El usuario se creo correctamente" });
     }
   } catch (error) {
      return res.status(500).json({ error: "Server Error" });

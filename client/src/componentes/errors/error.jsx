@@ -1,16 +1,31 @@
-import { useSelector } from "react-redux";
+import "./error.css";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { clearErrors } from "../../redux/actions";
+import { useEffect } from "react";
 
 function ErrorHandler() {
   const errors = useSelector((state) => state.errors);
-  console.log("SOY COMPONENTE EEEEE", errors.searchByNameError);
+  const dispatch = useDispatch();
 
   const renderErrorMessages = () => {
     if (errors.getAllRecipesError) {
-      return <div>Error en la obtención de todas las recetas: {errors.getAllRecipesError}</div>;
+      return (
+        <div>
+          Error en la obtención de todas las recetas:{" "}
+          {errors.getAllRecipesError}
+        </div>
+      );
     } else if (errors.getDetailError) {
-      return <div>Error al obtener los detalles de la receta: {errors.getDetailError}</div>;
+      return (
+        <div>
+          Error al obtener los detalles de la receta: {errors.getDetailError}
+        </div>
+      );
     } else if (errors.searchByNameError) {
-      return <div>Error en la búsqueda por nombre: {errors.searchByNameError}</div>;
+      return (
+        <div>Error en la búsqueda por nombre: {errors.searchByNameError}</div>
+      );
     } else if (errors.orderByNameError) {
       return <div>Error al ordenar por nombre: {errors.orderByNameError}</div>;
     } else if (errors.orderByHealthError) {
@@ -18,7 +33,9 @@ function ErrorHandler() {
     } else if (errors.filterByDietError) {
       return <div>Error al filtrar por dieta: {errors.filterByDietError}</div>;
     } else if (errors.filterByRecipeError) {
-      return <div>Error al filtrar por receta: {errors.filterByRecipeError}</div>;
+      return (
+        <div>Error al filtrar por receta: {errors.filterByRecipeError}</div>
+      );
     } else if (errors.loginError) {
       return <div>Error al iniciar sesión: {errors.loginError}</div>;
     } else if (errors.registerError) {
@@ -30,9 +47,41 @@ function ErrorHandler() {
     }
   };
 
-  return (
-    <div>{renderErrorMessages()}</div>
-  );
+  useEffect(() => {
+    if (
+      errors.getAllRecipesError ||
+      errors.getDetailError ||
+      errors.searchByNameError ||
+      errors.orderByNameError ||
+      errors.orderByHealthError ||
+      errors.filterByDietError ||
+      errors.filterByRecipeError ||
+      errors.loginError ||
+      errors.registerError ||
+      errors.postRecipeError
+    ) {
+      const timer = setTimeout(() => {
+        dispatch(clearErrors());
+      }, 3000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [
+    dispatch,
+    errors.getAllRecipesError,
+    errors.getDetailError,
+    errors.searchByNameError,
+    errors.orderByNameError,
+    errors.orderByHealthError,
+    errors.filterByDietError,
+    errors.filterByRecipeError,
+    errors.loginError,
+    errors.registerError,
+    errors.postRecipeError,
+  ]);
+
+  return <div>{renderErrorMessages()}</div>;
 }
 
 export default ErrorHandler;

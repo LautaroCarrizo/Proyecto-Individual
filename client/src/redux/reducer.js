@@ -22,29 +22,35 @@ import {
   REGISTER_FAILURE,
   POST_RECIPES_SUCCESS,
   POST_RECIPES_FAILURE,
+  CLEAR_MESSAGES,
+  CLEAR_ERRORS,
 } from "./actions";
 
 const initialState = {
-  allRecipes: [], //siempre rederizo este
-  datosRecipes: [], // y en este aplico los filtros
+  allRecipes: [],
+  datosRecipes: [],
   access: false,
+  message: {
+    registerPostMessage: null,
+    recipePostMessage: null,
+  },
   errors: {
-    getAllRecipesError: null, 
-    getDetailError: null, 
-    searchByNameError: null, 
-    orderByNameError: null, 
-    orderByHealthError: null, 
-    filterByDietError: null, 
-    filterByRecipeError: null, 
-    loginError: null, 
+    getAllRecipesError: null,
+    getDetailError: null,
+    searchByNameError: null,
+    orderByNameError: null,
+    orderByHealthError: null,
+    filterByDietError: null,
+    filterByRecipeError: null,
+    loginError: null,
     registerError: null,
-    postRecipeError: null, 
+    postRecipeError: null,
   },
 };
 
 const rootReducer = (state = initialState, action) => {
   console.log(action);
-  console.log("GLOBAL ERROR NAME", state.errors);
+  console.log("GLOBAL MESSAGE", state.message);
   switch (action.type) {
     case LOG_IN_SUCCESS:
       return {
@@ -66,6 +72,7 @@ const rootReducer = (state = initialState, action) => {
     case REGISTER_SUCCESS:
       return {
         ...state,
+        message: { ...state.message, registerPostMessage: action.payload },
       };
     case REGISTER_FAILURE:
       return {
@@ -75,11 +82,15 @@ const rootReducer = (state = initialState, action) => {
     case POST_RECIPES_SUCCESS:
       return {
         ...state,
+        message: { ...state.message, recipePostMessage: action.payload },
       };
     case POST_RECIPES_FAILURE:
       return {
         ...state,
-        errors: { ...state.errors, postRecipeError: action.payload.postRecipeError },
+        errors: {
+          ...state.errors,
+          postRecipeError: action.payload.postRecipeError,
+        },
       };
     case REQUETS_ALL_RECIPES_SUCCESS:
       return {
@@ -188,7 +199,30 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allRecipes: state.datosRecipes,
       };
-
+    case CLEAR_MESSAGES:
+      return {
+        ...state,
+        message: {
+          registerPostMessage: null,
+          recipePostMessage: null,
+        },
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        errors: {
+          getAllRecipesError: null,
+          getDetailError: null,
+          searchByNameError: null,
+          orderByNameError: null,
+          orderByHealthError: null,
+          filterByDietError: null,
+          filterByRecipeError: null,
+          loginError: null,
+          registerError: null,
+          postRecipeError: null,
+        },
+      };
     default:
       return state;
   }

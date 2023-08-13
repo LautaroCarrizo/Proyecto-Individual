@@ -1,17 +1,19 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {postRecipeAction} from "../../redux/actions"
+import { postRecipeAction } from "../../redux/actions";
 import validation from "./validationsForms";
 import "./form.css";
+
 export default function FormRecipe() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [recipe, setRecipe] = useState({
     name: "",
     summary: "",
     healthScore: 0,
     steps: "",
     diets: [],
+    img: null,
   });
   const [errors, setError] = useState([]);
 
@@ -21,7 +23,11 @@ export default function FormRecipe() {
     if (Object.keys(validationErrors).length > 0) {
       setError(validationErrors);
     } else {
-      dispatch(postRecipeAction(recipe));
+      const recipeWithImage = {
+        ...recipe,
+        image: "../../../img/imgRecipe.jpg",
+      };
+      dispatch(postRecipeAction(recipeWithImage));
     }
   }
 
@@ -33,29 +39,26 @@ export default function FormRecipe() {
     } else {
       parsedValue = value;
     }
-    
+
     const updatedRecipe = { ...recipe, [name]: parsedValue };
-  
+
     setRecipe(updatedRecipe);
     setError(validation(updatedRecipe));
   }
-  
-    function handlerChangeDiets(event) {
-      const { value } = event.target;
-      console.log(value)
-      const updatedDiets = recipe.diets.includes(value)
+
+  function handlerChangeDiets(event) {
+    const { value } = event.target;
+    console.log(value);
+    const updatedDiets = recipe.diets.includes(value)
       ? recipe.diets.filter((d) => d !== value)
       : [...recipe.diets, value];
-  
+
     const updatedRecipe = { ...recipe, diets: updatedDiets };
-  
-    console.log("SOY RECIPE", recipe);
-    console.log(updatedRecipe);
-  
+
     setRecipe(updatedRecipe);
-      setError(validation(updatedRecipe));
-    }
-  
+    setError(validation(updatedRecipe));
+  }
+
   return (
     <div className="contarinerForm">
       <h1 className="tituloForm2 tituloInvertido">Crea tu propia Receta!</h1>
@@ -117,11 +120,6 @@ export default function FormRecipe() {
               <span className="errors"> {errors.steps} </span>
             ) : null}
           </div>
-          {/* <div className="inputBox"> //! VER COMO RENDERIZAR UNA IMAGEN RANDOM DE COMIDA
-          <label className="label">IMG</label>
-          <input  className="textArea" name="email" onChange={handleChange}  value= {recipe.summary} type="text" placeholder="email..."></input>
-           {errors.username ? (<span className="errors"> {errors.username} </span>) : null}
-          </div> */}
           <div className="inputBox">
             <label className="label">Diets</label>
             <select
@@ -146,12 +144,15 @@ export default function FormRecipe() {
               <span className="errors"> {errors.diets} </span>
             ) : null}
           </div>
-           {errors.form ? (<span className="errors"> {errors.form} </span>) : null}
+          {errors.form ? <span className="errors"> {errors.form} </span> : null}
           <div className="containerSubmit">
-            <input  className="submit" type="submit"></input>
+            <input className="submit" type="submit"></input>
           </div>
         </div>
       </form>
+      <div className="containerVideo">
+              <div></div>
+      </div>
     </div>
   );
 }

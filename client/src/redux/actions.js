@@ -25,6 +25,8 @@ export const LOG_IN_FAILURE = "LOG_IN_FAILURE";
 export const LOG_OUT = "LOG_OUT";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const CLEAR_MESSAGES = "CLEAR_MESSAGES"
 //? ACTIONS
 
 export const getAllRecipes = () => {
@@ -114,18 +116,17 @@ export const postRecipeAction = (dataRecipe) => {
     try {
       const endpoint = `http://localhost:3001/recipes`;
       const response = await axios.post(endpoint, dataRecipe);
-      const newRecipe = response.data;
-      console.log("SOY ACTIONN POST", newRecipe);
-      dispatch(postRecipesSuccess(newRecipe));
+      const message = response.data;
+      dispatch(postRecipesSuccess(message));
     } catch (error) {
       dispatch(postRecipesFailure(error.message));
     }
   };
 };
 
-export const postRecipesSuccess = (newRecipe) => {
-  console.log(newRecipe, "AAAAAAAAAAAAA");
-  return { type: POST_RECIPES_SUCCESS, payload: newRecipe };
+export const postRecipesSuccess = (message) => {
+  console.log("AAAAAAAAA", message)
+  return { type: POST_RECIPES_SUCCESS, payload: message };
 };
 export const postRecipesFailure = (error) => {
   return { type: POST_RECIPES_FAILURE, payload: { postRecipeError: error } };
@@ -232,17 +233,16 @@ export const register = (userData) => {
       const URL = "http://localhost:3001/register";
       const endpoint = URL;
       const { data } = await axios.post(endpoint, { email, password });
-      const { access } = data;
-      const newUser = access;
-      console.log(newUser);
-      dispatch(registerSuccess(newUser));
+      const { message } = data;
+      console.log("SOY EL NUEVO USSSS", message);
+      dispatch(registerSuccess(message));
     } catch (error) {
       dispatch(registerFailure(error));
     }
   };
 };
-export const registerSuccess = (newUser) => {
-  return { type: REGISTER_SUCCESS, payload: newUser };
+export const registerSuccess = (message) => {
+  return { type: REGISTER_SUCCESS, payload: message };
 };
 export const registerFailure = (error) => {
   console.log("EEEEEE", error);
@@ -272,3 +272,10 @@ export const loginFailure = (error) => {
 export const logout = () => {
   return { type: LOG_OUT };
 };
+
+export const clearMessages = () => {
+ return {type: CLEAR_MESSAGES}
+} 
+export const clearErrors = () => {
+  return {type: CLEAR_ERRORS}
+}

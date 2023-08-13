@@ -78,7 +78,7 @@ async function postRecipe(req, res) {
       },
     });
    
-    return res.status(200).json({ message: "Created", data: recipe });
+    return res.status(200).json({ message: "La receta se creo correctamente"});
   } catch (error) {
 
     res.status(500).json({ error: error.message });
