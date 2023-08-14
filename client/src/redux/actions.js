@@ -78,6 +78,7 @@ export const searchByName = (name) => {
       const endpoint = `http://localhost:3001/recipes?name=${name}`;
       const response = await axios.get(endpoint);
       const recipesData = response.data;
+      console.log("SOYY ACTION NAME", recipesData)
       dispatch(searchByNameSuccess(recipesData));
     } catch (error) {
       dispatch(searchByNameFailure(error.response.data));

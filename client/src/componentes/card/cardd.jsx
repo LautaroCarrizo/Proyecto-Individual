@@ -20,10 +20,9 @@ function Card(props) {
   }
 
   return (
-    <div className="card">
-      <h1>{name}</h1>
-      <button onClick={handlerDetail}>Detalles</button>
+    <div onClick={handlerDetail} className="card">
       <img src={image}></img>
+      <h1>{name}</h1>
       <ul className="containerList">
         <li>
           Diets:
@@ -32,7 +31,7 @@ function Card(props) {
           })}
         </li>
       </ul>
-      <button onClick={handleClose}>Cerrar</button>
+    <div className="onclose">  <button onClick={(event) => { event.stopPropagation(); handleClose(); }}>Cerrar</button></div> 
     </div>
   );
 }

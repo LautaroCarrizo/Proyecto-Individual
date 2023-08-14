@@ -9,13 +9,11 @@ import Nav from "./componentes/nav/nav";
  import Detail from "./componentes/detail/detail"
 import Footer from "./componentes/footer/footer";
 import ErrorHandler from "./componentes/errors/error";
-import Messages from "./componentes/messages/messages";
 function App() {
   let ubi = useLocation();
   return (
     <div className="App">
         <ErrorHandler/>
-        <Messages/>
       {ubi.pathname !== "/" && <Nav showNav={ubi.pathname !== "/"} />}
       <Routes>
         <Route path="/" element={<Landing />}></Route>

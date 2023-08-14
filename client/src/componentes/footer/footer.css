@@ -1,16 +1,51 @@
 
 .containerFooter{
     width: 100%;
-    min-height: 20vh;
-    background: linear-gradient(to right, #606c88, #3f4c6b);  
- 
+    min-height: 25vh;
+    background: linear-gradient(to right, #b98b4a, #bd9a31);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .containerTituloFooter{
-    margin: 0px;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 1rem;
-    color:#ffffff;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    width: 40%;
+    padding-left: 1rem;
 }
+.containerTituloFooter h1 {
+    height: 3vh;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.7rem;
+    color:#ffffff;
+    letter-spacing: 5px;
+  
+}
+.containerSocialMedia{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;  
+    height: 20vh;
+    border-left: 2px solid black;
+}
+.iconoFooter{
+    width: 80px;
+    height: 80px;
+    transition: transform 0.3s, filter 0.3s; 
+    padding: 0 2rem;
+}
+.iconoFooter:hover {
+    transform: scale(1.2); 
+  }
+  .textoFooter{
+    font-size: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 1px;
+  }
+  .imgHenry{
+    width: 30%;
+    height: 25vh;
+  }

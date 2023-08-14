@@ -5,7 +5,7 @@ import Cards from "../cards/cards";
 import { getAllRecipes } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersOrders from "../filters/filtersOrders";
-import SearchBar from "../serachBar/searchBar";
+
 export default function Home() {
   const dispatch = useDispatch();
 
@@ -38,20 +38,16 @@ export default function Home() {
 
   return (
     <div className="containerHome">
-      <div className="containerTitulo">
-        <h1>Recipes</h1>
-      </div>
       <div className="contaienerFiltros">
         <FiltersOrders pageFiltersOrders={handlerFilterOrders} />
-      </div>
-      <div className="containerBar">
-        <SearchBar />
       </div>
       <div>
         <Cards recipes={recipesToShow} />
       </div>
-      <button onClick={handlePrevPage}> Retroceder </button>
-      <button onClick={handleNextPage}> Avanzar </button>
+      <div className="containerButtomHome">
+      <div  className="back"><button onClick={handlePrevPage}> back </button> </div>  
+     <div className="next"> <button   onClick={handleNextPage}> next </button></div> 
+      </div>
     </div>
   );
 }

@@ -15,9 +15,12 @@ async function getRecipeByName(req, res) {
       return res.status(200).json({alldata: dataBaseRecipeName});
     else {
       const response = await axios.get(
-        `${URL}?apiKey=${API_KEY}&query=${name}`
+        `${URL}?apiKey=${API_KEY}&addRecipeInformation=true&query=${name}`
       );
+      
      const dataName = response.data.results?.map((recipe) => {
+     
+
       return {
         id: recipe.id,
         name: recipe.title,
@@ -26,7 +29,7 @@ async function getRecipeByName(req, res) {
         healthScore: recipe.healthScore,
       };
      })
-
+    
       return response.data.results.length ? res.status(200).json({alldata: dataName}) : res.status(404).json({ message: "Not found" });
     }
   } catch (error) {

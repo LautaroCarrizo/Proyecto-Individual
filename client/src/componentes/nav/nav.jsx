@@ -10,7 +10,7 @@ const dispatch = useDispatch()
 
     return (
         <nav className="containerNav">
-        <h1 className="tituloNav">Proyecto Integrador</h1>
+        <h1 className="tituloNav">Cheff Linguini</h1>
         <div className="containerBotonesNav">
         <button className= "btn1">
             <NavLink style={{ textDecoration: "none" }} to="/home"> Home </NavLink>

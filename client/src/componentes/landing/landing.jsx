@@ -7,7 +7,7 @@ export default function Landing() {
    return (
      <div className="containerLanding">
        <div className="containerTitle">
-         <h1>Proyecto Individual Food</h1>
+         <h1>Linguine Restaurant</h1>
         <div className="containerLogin">
           <Login/>
           </div>          

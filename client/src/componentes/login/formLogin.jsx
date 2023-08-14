@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, register } from "../../redux/actions";
 import validations from "./validations";
+import Messages from "../messages/messages";
 
 
 export default function Login() {
@@ -49,7 +50,7 @@ export default function Login() {
   return (
     <form onSubmit={submitHandlerAll}>
       <div>
-        <div>
+        <div className="inputBoxLogin">
           <label htmlFor="email">email: </label>
           <input
             placeholder="Ingrese su email"
@@ -62,7 +63,7 @@ export default function Login() {
           <br />
           {errors.email ? <span>{errors.email}</span> : null}
         </div>
-        <div>
+        <div  className="inputBoxLogin">
           <label htmlFor="password">password: </label>
           <input
             placeholder="password.."
@@ -76,7 +77,8 @@ export default function Login() {
           {errors.password ? <span>{errors.password}</span> : null}
         </div>
       </div>
-      <div>
+      <div><Messages/> </div>
+      <div className="containerButton">
         <h3>¿Tienes una cuenta? ¡Regístrate!</h3>
         <button
           type="submit"

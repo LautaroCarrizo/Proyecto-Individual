@@ -1,0 +1,27 @@
+.containerSearch{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.inputSearch {
+    width: 15rem;
+    height: 5vh ;
+}
+.containerSearch button {
+    background: transparent;
+    margin: 15px;
+    height: 4vh;
+    width: 5rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; 
+    border: 1px solid #ccc;
+    color: #fffcfc;
+}
+.containerSearch button:hover {
+    background-color: #f0eab7; 
+    border-color: #aaa; 
+    color: #222; 
+    cursor: pointer;
+  }

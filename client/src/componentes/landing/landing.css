@@ -11,12 +11,12 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Cambia a 'center' para centrar verticalmente */
+  justify-content: center; 
   align-items: center; 
 }
-.containerTitle h1{ /* Cambia la dirección del flex a 'column' */
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  letter-spacing: 1px;
+.containerTitle h1{ 
+  font-family: cursive;
+  letter-spacing: 6px;
   color: rgb(247, 236, 166);
   font-size: 2rem;
   padding: 1rem;
@@ -33,31 +33,13 @@
   width: 70%;
   min-height: 100vh;
 }
-
-.containerButton{
+.containerLogin{
+  height: 40vh;
   width: 100%;
-  height: 20vh;
   display: flex;
   justify-content: center;
-  align-items: end;
-}
-.containerButton button{
-  height: 7vh;
-  width: 10rem;
-  border: 2px solid rgb(247, 236, 166);
-  border-radius: 10px;
-  font-size: 1rem;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
-  background: transparent;
-  color: rgb(247, 236, 166);
-  color: rgb(247, 236, 166);
-  transition: background-color 0.3s, color 0.3s; /* Agregado efecto de transición */
-}
-
-.containerButton button:hover {
-  background-color: rgb(247, 236, 166);
-  color: white;
-}
+  align-items: center;
+}   
 .containerIcons{
   display: flex;
   align-items: end;

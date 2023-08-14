@@ -9,6 +9,7 @@ import {
   clear,
 } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import SearchBar from "../serachBar/searchBar";
 
 export default function FiltersOrders({pageFiltersOrders}) {
   const dispatch = useDispatch();
@@ -60,15 +61,15 @@ export default function FiltersOrders({pageFiltersOrders}) {
   };
 
   return (
-    <div>
+    <div className="containerAll">  
       <div className="containerFiltersOrders">
          <div className="containerBoxFilters"> 
           <button className="button1" onClick={toggleFiltersDiets}>Tipos de dietas</button>
           {showfilterDiet && (
-            <div className="containerSlect2">
+            <div className="containerSlect1">
               <ul>
-                <li>
-                  <label htmlFor="dietSelect">Filtrar por dieta:</label>
+                <li style={{ listStyle: "none" }}>
+                  {/* <label htmlFor="dietSelect">Filtrar por dieta:</label> */}
                   <select id="dietSelect" onChange={handleFilterDiets}>
                     <option value="gluten free">gluten free</option>
                     <option value="primal">primal</option>
@@ -96,8 +97,8 @@ export default function FiltersOrders({pageFiltersOrders}) {
           {showOrders && (
             <div className="containerSlect1">
               <ul>
-                <li>
-                  <label htmlFor="Orders">Ordenamientos : </label>
+                <li  style={{ listStyle: "none" }}>
+                  {/* <label htmlFor="Orders">Ordenamientos : </label> */}
                   <select id="orderSelect" onChange={handlerOrders}>
                     <option value="A">Ascendente</option>
                     <option value="B">Descendente</option>
@@ -109,8 +110,12 @@ export default function FiltersOrders({pageFiltersOrders}) {
             </div>
           )}
           </div> 
+          <button className="button1" onClick={handlerClear}>Limpiar Filtros</button>
           </div>
-         <div className="containerClear"><button onClick={handlerClear}>Limpiar Filtros</button> </div>
+          <div className="containerBar">
+          <h4>Busca tu receta por nombre</h4>
+        <SearchBar />
+      </div>
     </div>
   );
 }

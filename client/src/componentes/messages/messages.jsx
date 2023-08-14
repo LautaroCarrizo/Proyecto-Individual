@@ -9,9 +9,9 @@ export default function Messages() {
 
   const renderMessages = () => {
     if (message.registerPostMessage) {
-      return <div> Chef: {message.registerPostMessage}</div>;
+      return <div className="messages"> <p>Chef: {message.registerPostMessage} </p> </div>;
     } else if (message.recipePostMessage) {
-      return <div> Chef: {message.recipePostMessage.message}</div>;
+      return <div className="messages"> <p>Chef: {message.recipePostMessage} </p> </div>;
     }
   };
   useEffect(() => {

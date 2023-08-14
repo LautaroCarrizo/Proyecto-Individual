@@ -24,15 +24,16 @@ export default function SearchBar() {
   };
 
   return (
-    <div>
+    <div className="containerSearch">
       <input
+      className="inputSearch"
         type="search"
         placeholder="Busca una receta"
         onChange={handleChange}
         onKeyPress={handleKeyPress}
         value={name}
       />
-      <button onClick={handleSearch}>Agregar</button>
+      <button onClick={handleSearch}>Buscar</button>
     </div>
   );
 }
