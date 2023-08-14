@@ -62,7 +62,6 @@ export const getDetailRecipes = (id) => {
   };
 };
 export const getDetailSuccess = (detail) => {
-  console.log(detail);
   return { type: REQUETS_DETAIL_RECIPES_SUCCESS, payload: detail };
 };
 export const getDetailFailure = (error) => {

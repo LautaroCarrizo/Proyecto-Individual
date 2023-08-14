@@ -9,6 +9,7 @@ import Nav from "./componentes/nav/nav";
  import Detail from "./componentes/detail/detail"
 import Footer from "./componentes/footer/footer";
 import ErrorHandler from "./componentes/errors/error";
+
 function App() {
   let ubi = useLocation();
   return (
