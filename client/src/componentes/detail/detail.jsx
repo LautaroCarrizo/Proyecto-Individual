@@ -1,7 +1,7 @@
 //mport { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "./detail.css";
-
+import ErrorHandler from "../errors/error";
 export default function Detail() {
   const allRecipes = useSelector((state) => state.allRecipes);
 
@@ -19,6 +19,7 @@ export default function Detail() {
       >
         <source src="../../../img/video (2160p).mp4" type="video/mp4" />
       </video>
+      <ErrorHandler/>
       <div className="titleDetail">
         {" "}
         <h1>Detail</h1>{" "}
@@ -43,7 +44,7 @@ export default function Detail() {
                 </div>
               ))
             ) : (
-              <p> {allRecipes.steps} </p>
+              <p> steps: {allRecipes.steps} </p>
             )}
           </div>
         </div>

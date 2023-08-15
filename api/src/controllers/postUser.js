@@ -1,4 +1,4 @@
-const { User } = require("../db");
+const { User, Recipe } = require("../db");
 
 async function postUser(req, res) {
   const { email, password } = req.body;
@@ -33,6 +33,10 @@ async function postUser(req, res) {
         email: email,
         password: password,
       });
+      const recipesToAdd = await Recipe.findAll();
+      if (recipesToAdd.length > 0) {
+        await newUser.setRecipes(recipesToAdd);
+      }
        res.status(200).json({ message: "El usuario se creo correctamente" });
     }
   } catch (error) {

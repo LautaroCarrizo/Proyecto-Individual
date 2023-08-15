@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postRecipeAction } from "../../redux/actions";
 import validation from "./validationsForms";
+import Messages from "../messages/messages";
+import ErrorHandler from "../errors/error";
 import "./form.css";
 
 export default function FormRecipe() {
@@ -60,10 +62,23 @@ export default function FormRecipe() {
   }
 
   return (
-    <div className="contarinerForm">
-      <h1 className="tituloForm2 tituloInvertido">Crea tu propia Receta!</h1>
-      <form className="form" onSubmit={handlerPost}>
-        <div className="containerInput" id="2">
+    <div className="containerAllFormRecipe">
+      <video
+        autoPlay
+        loop
+        muted
+        style={{
+          width: "50%",
+          height: "100vh",
+          objectFit: "cover",
+        }}
+      >
+        <source src="../../../img/formvideo3.mp4" type="video/mp4" />
+      </video>
+      <div className="contarinerForm">
+        <form className="form" onSubmit={handlerPost}>
+          <h1 className="tituloForm">¡Crea tu propia Receta!</h1>
+
           <div className="inputBox">
             <label className="label">Recipe Name</label>
             <input
@@ -145,13 +160,12 @@ export default function FormRecipe() {
             ) : null}
           </div>
           {errors.form ? <span className="errors"> {errors.form} </span> : null}
+          <Messages />
           <div className="containerSubmit">
             <input className="submit" type="submit"></input>
           </div>
-        </div>
-      </form>
-      <div className="containerVideo2">
-              <div></div>
+          <ErrorHandler/>
+        </form>
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "../serachBar/searchBar";
 
+
 export default function FiltersOrders({pageFiltersOrders}) {
   const dispatch = useDispatch();
   const datosRecipes = useSelector((state) => state.datosRecipes);

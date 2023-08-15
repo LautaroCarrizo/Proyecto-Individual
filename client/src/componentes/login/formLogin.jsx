@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, register } from "../../redux/actions";
 import validations from "./validations";
 import Messages from "../messages/messages";
-
+import ErrorHandler from "../errors/error";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -77,7 +77,7 @@ export default function Login() {
           {errors.password ? <span>{errors.password}</span> : null}
         </div>
       </div>
-      <div><Messages/> </div>
+      <div><Messages/><ErrorHandler/> </div>
       <div className="containerButton">
         <h3>¿Tienes una cuenta? ¡Regístrate!</h3>
         <button

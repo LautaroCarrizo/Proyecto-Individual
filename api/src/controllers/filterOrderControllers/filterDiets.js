@@ -4,7 +4,7 @@ const {Diets} = require("../../db")
 
 async function filterDiets(req, res) {
     const { nameDiet, datosRecipes } = req.body;
-     //console.log(datosRecipes.alldata)
+   
     try {
         const diet = await Diets.findOne({ where: { name: nameDiet } });
         const dietName = diet.name;

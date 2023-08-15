@@ -3,15 +3,18 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearMessages } from "../../redux/actions";
 import { useEffect } from "react";
+
 export default function Messages() {
   const dispatch = useDispatch()
   const message = useSelector((state) => state.message);
+  console.log("SOY EL COMPONENTE", message.registerPostMessage)
+  //console.log("SOY EL COMPONENTE", message.recipePostMessage)
 
   const renderMessages = () => {
     if (message.registerPostMessage) {
       return <div className="messages"> <p>Chef: {message.registerPostMessage} </p> </div>;
     } else if (message.recipePostMessage) {
-      return <div className="messages"> <p>Chef: {message.recipePostMessage} </p> </div>;
+      return <div className="messages"> <p> Chef: {message.recipePostMessage} </p> </div>;
     }
   };
   useEffect(() => {

@@ -50,7 +50,7 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   console.log(action);
-
+  //console.log("SOY ACCESSSSSS", state.access)
   switch (action.type) {
     case LOG_IN_SUCCESS:
       return {
@@ -82,7 +82,7 @@ const rootReducer = (state = initialState, action) => {
     case POST_RECIPES_SUCCESS:
       return {
         ...state,
-        message: { ...state.message, recipePostMessage: action.payload },
+        message: { ...state.message, recipePostMessage: action.payload.message},
       };
     case POST_RECIPES_FAILURE:
       return {
@@ -91,7 +91,7 @@ const rootReducer = (state = initialState, action) => {
           ...state.errors,
           postRecipeError: action.payload.postRecipeError,
         },
-      };
+      }; 
     case REQUETS_ALL_RECIPES_SUCCESS:
       return {
         ...state,

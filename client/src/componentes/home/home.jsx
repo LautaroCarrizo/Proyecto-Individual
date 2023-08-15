@@ -5,6 +5,7 @@ import Cards from "../cards/cards";
 import { getAllRecipes } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersOrders from "../filters/filtersOrders";
+import ErrorHandler from "../errors/error";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ export default function Home() {
     <div className="containerHome">
       <div className="contaienerFiltros">
         <FiltersOrders pageFiltersOrders={handlerFilterOrders} />
+       <ErrorHandler/>
       </div>
       <div>
         <Cards recipes={recipesToShow} />

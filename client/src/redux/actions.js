@@ -255,7 +255,7 @@ export const login = (userData) => {
       const endpoint = "http://localhost:3001/login";
       const { data } = await axios.post(endpoint, { email, password });
       const { acc } = data;
-      dispatch(loginSucces(acc));
+        dispatch(loginSucces(acc));
     } catch (error) {
       dispatch(loginFailure(error));
     }
