@@ -50,7 +50,7 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   console.log(action);
-  //console.log("SOY ACCESSSSSS", state.access)
+  console.log("DETAILLL", state.allRecipes)
   switch (action.type) {
     case LOG_IN_SUCCESS:
       return {
@@ -108,7 +108,7 @@ const rootReducer = (state = initialState, action) => {
     case REQUETS_DETAIL_RECIPES_SUCCESS:
       return {
         ...state,
-        allRecipes: action.payload,
+        allRecipes: action.payload.detail,
         errors: { ...state.errors, getDetailError: null },
       };
     case REQUETS_DETAIL_RECIPES_FAILURE:

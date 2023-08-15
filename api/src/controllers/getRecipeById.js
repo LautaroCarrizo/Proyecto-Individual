@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Recipe, Diets, sequelize } = require("../db");
+const { Recipe, Diets } = require("../db");
 const URL = `https://api.spoonacular.com/recipes`;
 const { API_KEY } = process.env;
 
@@ -34,30 +34,34 @@ async function getRecipeById(req, res) {
         return res.status(404).json({ message: "Not Found" });
       }
     } else {
-      const dataBaseRecipeId = await Recipe.findByPk(idRecipe);
-      const recipeData = dataBaseRecipeId.dataValues;
-      const recipesDB = await Recipe.findAll({
-        where: { id: recipeData.id }, 
-        include: [
-          {
-            model: Diets,
-            as: "diets",
-            through: {
-              model: sequelize.models.RecetaDietaTable,
-              attributes: [],
-            },
-          },
-        ],
-      });
+      const recipesDB = await Recipe.findOne({
+        where : {
+          id: idRecipe
+        },
+        include: {
+          model: Diets,
+          attributes: ["name"],
+        },
+      })
       
-      console.log("FROM DATA BASE", recipesDB);
       if (recipesDB) {
-        console.log(recipesDB);
-        return res.status(200).json({ recipesDB });
+        const recipeWhitDiets = recipesDB.dataValues.diets.map((diet) => diet.dataValues.name)
+        const detail = {
+          id: recipesDB.id,
+          name: recipesDB.name,
+          image: recipesDB.image,
+          summary: recipesDB.summary,
+          healthScore: recipesDB.healthScore,
+          steps: recipesDB.steps,
+          diets: recipeWhitDiets
+        }
+        
+        console.log("FROM DATA BASE", detail);
+        return res.status(200).json({ detail });
       } else {
+      }
         return res.status(404).json({ message: "Not Found" });
       }
-    }
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

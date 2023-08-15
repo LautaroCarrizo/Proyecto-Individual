@@ -53,7 +53,7 @@ export const getDetailRecipes = (id) => {
     try {
       const endpoint = `http://localhost:3001/recipes/${id}`;
       const response = await axios.get(endpoint);
-      const detail = response.data.recipeSend;
+      const detail = response.data;
       console.log(detail);
       dispatch(getDetailSuccess(detail));
     } catch (error) {

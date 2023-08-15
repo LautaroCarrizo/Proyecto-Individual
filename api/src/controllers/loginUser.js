@@ -3,14 +3,14 @@ const {User} = require("../db")
 async function loginUser(req, res){
   try {
     const {email, password} = req.body
-    console.log("SOOOY BODY", req.body)
+    
 
     const findUser = await User.findOne({
         where: {
           email: email,
         },
       });
-      console.log("USUARIO ENCONTRADO", findUser)
+     
     if(!findUser){
      return res.status(404).json({message: "Usuario no encontrado"})   
     }  

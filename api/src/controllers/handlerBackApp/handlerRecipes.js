@@ -8,7 +8,6 @@ const handlerRecipes = async () => {
             // .get(path.join(config.URL_SPOONACULAR, `complexSearch${config.API_KEY}&addRecipeInformation=true&number=100`))
             .get(`https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`)
             .then(({ data }) => {
-                console.log(data)
                 return data.results
             })
 
