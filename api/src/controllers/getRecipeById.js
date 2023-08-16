@@ -5,7 +5,7 @@ const { API_KEY } = process.env;
 
 async function getRecipeById(req, res) {
   const { idRecipe } = req.params;
-  let recipeSend = "";
+  let detail = "";
   try {
     if (Number(idRecipe)) {
       const response = await axios.get(
@@ -27,41 +27,42 @@ async function getRecipeById(req, res) {
           }),
           diets: data.diets,
         };
-        recipeSend = recipe;
+        detail = recipe;
 
-        return res.json({ message: "encontrado", recipeSend });
+        return res.json({ detail });
       } else {
         return res.status(404).json({ message: "Not Found" });
       }
     } else {
       const recipesDB = await Recipe.findOne({
-        where : {
-          id: idRecipe
+        where: {
+          id: idRecipe,
         },
         include: {
           model: Diets,
           attributes: ["name"],
         },
-      })
-      
+      });
+
       if (recipesDB) {
-        const recipeWhitDiets = recipesDB.dataValues.diets.map((diet) => diet.dataValues.name)
-        const detail = {
+        const recipeWhitDiets = recipesDB.dataValues.diets.map(
+          (diet) => diet.dataValues.name
+        );
+        detail = {
           id: recipesDB.id,
           name: recipesDB.name,
           image: recipesDB.image,
           summary: recipesDB.summary,
           healthScore: recipesDB.healthScore,
           steps: recipesDB.steps,
-          diets: recipeWhitDiets
-        }
-        
-        console.log("FROM DATA BASE", detail);
+          diets: recipeWhitDiets,
+        };
+
         return res.status(200).json({ detail });
       } else {
       }
-        return res.status(404).json({ message: "Not Found" });
-      }
+      return res.status(404).json({ message: "Not Found" });
+    }
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
