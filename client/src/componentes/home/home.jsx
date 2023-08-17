@@ -13,19 +13,25 @@ export default function Home() {
   const allRecipes = useSelector((state) => state.allRecipes);
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesToShow, setRecipesToShow] = useState([]);
+  const recipesPerPage = 9;
+  const startIdx = (currentPage - 1) * recipesPerPage;
+  const endIdx = startIdx + recipesPerPage;
+  const maxPage = Math.ceil(allRecipes.alldata?.length  / recipesPerPage)
+
+
+
   useEffect(() => {
     dispatch(getAllRecipes());
   }, [dispatch]);
-
+  
   useEffect(() => {
-    const recipesPerPage = 9;
-    const startIdx = (currentPage - 1) * recipesPerPage;
-    const endIdx = startIdx + recipesPerPage;
     setRecipesToShow(allRecipes.alldata?.slice(startIdx, endIdx));
   }, [currentPage, allRecipes.alldata]);
 
   const handleNextPage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
+    if(currentPage + 1 < maxPage + 1){
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
   };
 
   const handlePrevPage = () => {
@@ -33,6 +39,7 @@ export default function Home() {
       setCurrentPage((page) => page - 1);
     }
   };
+
   const handlerFilterOrders = () => {
     setCurrentPage(1);
   };
@@ -47,8 +54,8 @@ export default function Home() {
         <Cards recipes={recipesToShow} />
       </div>
       <div className="containerButtomHome">
-      <div  className="back"><button onClick={handlePrevPage}> back </button> </div>  
-     <div className="next"> <button   onClick={handleNextPage}> next </button></div> 
+      <div  className={currentPage === 1 ? "hidden" : "back"}><button onClick={handlePrevPage}> back </button> </div>  
+     <div className= {currentPage === maxPage ? "hidden" : "next"}> <button   onClick={handleNextPage}> next </button></div> 
       </div>
     </div>
   );

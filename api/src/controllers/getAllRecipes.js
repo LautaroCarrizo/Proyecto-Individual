@@ -10,9 +10,9 @@ async function getAllRecipes(req, res) {
     // const response = await axios.get(
     //   `${URL}?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
     // );
-    //const { data } = response;
-    //const allDataRecipes = data.results;
-    const results = await handlerRecipes();
+    // const { data } = response;
+    // const results = data.results;
+     const results = await handlerRecipes();
 
     const recipesFromDB = await Recipe.findAll({
       attributes: ["id", "name", "image"],

@@ -26,7 +26,7 @@ export const LOG_OUT = "LOG_OUT";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
-export const CLEAR_MESSAGES = "CLEAR_MESSAGES"
+export const CLEAR_MESSAGES = "CLEAR_MESSAGES";
 //? ACTIONS
 
 export const getAllRecipes = () => {
@@ -48,13 +48,11 @@ export const getAllRecipesFailure = (error) => {
   return { type: REQUETS_ALL_RECIPES_FAILURE, payload: error };
 };
 export const getDetailRecipes = (id) => {
-  console.log(id);
   return async (dispatch) => {
     try {
       const endpoint = `http://localhost:3001/recipes/${id}`;
       const response = await axios.get(endpoint);
       const detail = response.data;
-      console.log(detail);
       dispatch(getDetailSuccess(detail));
     } catch (error) {
       dispatch(getDetailFailure(error.message));
@@ -65,7 +63,6 @@ export const getDetailSuccess = (detail) => {
   return { type: REQUETS_DETAIL_RECIPES_SUCCESS, payload: detail };
 };
 export const getDetailFailure = (error) => {
-  console.log("EEEERRRRROOOOR DETAIL", error);
   return {
     type: REQUETS_DETAIL_RECIPES_FAILURE,
     payload: { getDetailError: error },
@@ -77,7 +74,6 @@ export const searchByName = (name) => {
       const endpoint = `http://localhost:3001/recipes?name=${name}`;
       const response = await axios.get(endpoint);
       const recipesData = response.data;
-      console.log("SOYY ACTION NAME", recipesData)
       dispatch(searchByNameSuccess(recipesData));
     } catch (error) {
       dispatch(searchByNameFailure(error.response.data));
@@ -95,7 +91,6 @@ export const searchByNameFailure = (error) => {
 };
 
 export const onClose = (id, recipes) => {
-  console.log(id);
   const endpoint = "http://localhost:3001/onclose";
   return async (dispatch) => {
     try {
@@ -111,7 +106,6 @@ export const onClose = (id, recipes) => {
 };
 
 export const postRecipeAction = (dataRecipe) => {
-  console.log("SOY LA NUEVA RCIPE", dataRecipe);
   return async (dispatch) => {
     try {
       const endpoint = `http://localhost:3001/recipes`;
@@ -125,7 +119,6 @@ export const postRecipeAction = (dataRecipe) => {
 };
 
 export const postRecipesSuccess = (message) => {
-  console.log("AAAAAAAAA", message)
   return { type: POST_RECIPES_SUCCESS, payload: message };
 };
 export const postRecipesFailure = (error) => {
@@ -135,7 +128,6 @@ export const postRecipesFailure = (error) => {
 export const orderByName = (order, allRecipes) => {
   return async (dispatch) => {
     try {
-      console.log("ORDER NAME", order);
       const endpoint = "http://localhost:3001/order";
       const { data } = await axios.post(endpoint, { order, allRecipes });
       const orderName = data;
@@ -154,11 +146,9 @@ export const orderByNameFailure = (error) => {
 export const orderByHealth = (order, allRecipes) => {
   return async (dispatch) => {
     try {
-      console.log("ORDER HEALR", order);
       const endpoint = "http://localhost:3001/healthscore";
       const { data } = await axios.post(endpoint, { order, allRecipes });
       const orderHealth = data;
-      console.log(orderHealth, endpoint);
       dispatch(orderByHealthSuccess(orderHealth));
     } catch (error) {
       dispatch(orderByHealthFailure(error.message));
@@ -245,7 +235,6 @@ export const registerSuccess = (message) => {
   return { type: REGISTER_SUCCESS, payload: message };
 };
 export const registerFailure = (error) => {
-  console.log("EEEEEE", error);
   return { type: REGISTER_FAILURE, payload: error };
 };
 export const login = (userData) => {
@@ -255,7 +244,8 @@ export const login = (userData) => {
       const endpoint = "http://localhost:3001/login";
       const { data } = await axios.post(endpoint, { email, password });
       const { acc } = data;
-        dispatch(loginSucces(acc));
+      console.log("DAAAATA", data);
+      dispatch(loginSucces(acc));
     } catch (error) {
       dispatch(loginFailure(error));
     }
@@ -274,8 +264,8 @@ export const logout = () => {
 };
 
 export const clearMessages = () => {
- return {type: CLEAR_MESSAGES}
-} 
+  return { type: CLEAR_MESSAGES };
+};
 export const clearErrors = () => {
-  return {type: CLEAR_ERRORS}
-}
+  return { type: CLEAR_ERRORS };
+};

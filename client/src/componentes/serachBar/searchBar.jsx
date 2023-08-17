@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchByName } from "../../redux/actions";
 
-export default function SearchBar() {
+export default function SearchBar({pageFiltersOrders}) {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
 
@@ -15,11 +15,13 @@ export default function SearchBar() {
   const handleSearch = () => {
     dispatch(searchByName(name));
     setName("");
+    pageFiltersOrders()
   };
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       handleSearch();
+      pageFiltersOrders()
     }
   };
 

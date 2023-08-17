@@ -4,7 +4,7 @@ export default function validations(datos) {
   if (!datos.email) {
     errors.email = "el Email no puede estar vacio";
   } else if (!regex.test(datos.email)) {
-    errors.email = "el email no es valido";
+    errors.email = "El email no es valido";
   } else if (datos.email.length > 35) {
     errors.email = "el email no puede tener mas de 35 caracteres.";
   }

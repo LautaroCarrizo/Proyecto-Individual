@@ -5,12 +5,13 @@ const { API_KEY } = process.env;
 
 async function getRecipeById(req, res) {
   const { idRecipe } = req.params;
-  let detail = "";
+ 
+  let detail = null;
   try {
     if (Number(idRecipe)) {
       const response = await axios.get(
         `${URL}/${idRecipe}/information?apiKey=${API_KEY}`
-      );
+        );
       const { status, data } = response;
       if (status === 200 && data && data.id) {
         const recipe = {
@@ -28,7 +29,7 @@ async function getRecipeById(req, res) {
           diets: data.diets,
         };
         detail = recipe;
-
+        console.log("SOY DETAIL API", recipe)
         return res.json({ detail });
       } else {
         return res.status(404).json({ message: "Not Found" });

@@ -49,8 +49,7 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-  console.log(action);
-  console.log("DETAILLL", state.allRecipes)
+
   switch (action.type) {
     case LOG_IN_SUCCESS:
       return {

@@ -19,7 +19,7 @@ export default function Detail() {
       >
         <source src="../../../img/video (2160p).mp4" type="video/mp4" />
       </video>
-      <ErrorHandler/>
+      <ErrorHandler />
       <div className="titleDetail">
         {" "}
         <h1>Detail</h1>{" "}

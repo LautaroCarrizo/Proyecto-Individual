@@ -1,5 +1,5 @@
 import "./formLogin.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, register } from "../../redux/actions";
@@ -13,12 +13,12 @@ export default function Login() {
 
   const access = useSelector((state) => state.access);
 
-  const handlerNavigate = () => {
+  useEffect(()=> {
     if (access) {
       navigate("/home");
     }
-  };
-
+  }, [access, navigate, dispatch])
+  
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -32,20 +32,16 @@ export default function Login() {
     );
   };
 
- const submitHandlerAll = (event, str) => {
+  const submitHandlerAll = (event, str) => {
     if (str === "register") {
-      if (Object.keys(errors).length === 0) { 
         event.preventDefault();
         dispatch(register(userData));
-      } else {
-        throw new Error("Usuario no encontrado");
-      }
     } else {
       event.preventDefault();
       dispatch(login(userData));
-      handlerNavigate();
     }
   };
+  
 
   return (
     <form onSubmit={submitHandlerAll}>
@@ -60,9 +56,8 @@ export default function Login() {
             value={userData.email}
             onChange={handleChange}
           />
-          <br />
-          {errors.email ? <span>{errors.email}</span> : null}
         </div>
+          {errors.email ? <div className="containerSpan"> <span>{errors.email}</span> </div> : null}
         <div  className="inputBoxLogin">
           <label htmlFor="password">password: </label>
           <input
@@ -73,9 +68,8 @@ export default function Login() {
             value={userData.password}
             onChange={handleChange}
           />
-          <br />
-          {errors.password ? <span>{errors.password}</span> : null}
         </div>
+          {errors.password ? <div className="containerSpan"> <span>{errors.password}</span> </div> : null}
       </div>
       <div><Messages/><ErrorHandler/> </div>
       <div className="containerButton">

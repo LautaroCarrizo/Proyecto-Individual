@@ -27,7 +27,13 @@
     padding: 0.5rem; 
     border: 1px solid #ccc; 
   }
-  
+.containerSpan{
+width: 100%;
+display: flex;
+justify-content: center;
+color: rgb(247, 236, 166);;
+
+}
 .containerButton h3 {
     font-family: cursive;
     letter-spacing:3px;

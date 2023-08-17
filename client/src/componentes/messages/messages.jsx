@@ -7,8 +7,6 @@ import { useEffect } from "react";
 export default function Messages() {
   const dispatch = useDispatch()
   const message = useSelector((state) => state.message);
-  console.log("SOY EL COMPONENTE", message.registerPostMessage)
-  //console.log("SOY EL COMPONENTE", message.recipePostMessage)
 
   const renderMessages = () => {
     if (message.registerPostMessage) {

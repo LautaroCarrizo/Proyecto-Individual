@@ -59,6 +59,7 @@ export default function FiltersOrders({pageFiltersOrders}) {
   };
   const handlerClear = () => {
     dispatch(clear(datosRecipes));
+    pageFiltersOrders()
   };
 
   return (
@@ -70,7 +71,6 @@ export default function FiltersOrders({pageFiltersOrders}) {
             <div className="containerSlect1">
               <ul>
                 <li style={{ listStyle: "none" }}>
-                  {/* <label htmlFor="dietSelect">Filtrar por dieta:</label> */}
                   <select id="dietSelect" onChange={handleFilterDiets}>
                     <option value="gluten free">gluten free</option>
                     <option value="primal">primal</option>
@@ -99,7 +99,6 @@ export default function FiltersOrders({pageFiltersOrders}) {
             <div className="containerSlect1">
               <ul>
                 <li  style={{ listStyle: "none" }}>
-                  {/* <label htmlFor="Orders">Ordenamientos : </label> */}
                   <select id="orderSelect" onChange={handlerOrders}>
                     <option value="A">Ascendente</option>
                     <option value="B">Descendente</option>
@@ -115,7 +114,7 @@ export default function FiltersOrders({pageFiltersOrders}) {
           </div>
           <div className="containerBar">
           <h4>Busca tu receta por nombre</h4>
-        <SearchBar />
+        <SearchBar pageFiltersOrders={pageFiltersOrders} />
       </div>
     </div>
   );
