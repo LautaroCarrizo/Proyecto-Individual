@@ -19,8 +19,6 @@ async function getRecipeByName(req, res) {
       );
       
      const dataName = response.data.results?.map((recipe) => {
-     
-
       return {
         id: recipe.id,
         name: recipe.title,

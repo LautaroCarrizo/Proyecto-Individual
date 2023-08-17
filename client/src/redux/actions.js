@@ -217,14 +217,12 @@ export const clear = () => {
 
 export const register = (userData) => {
   const { email, password } = userData;
-  console.log(userData);
   return async (dispatch) => {
     try {
       const URL = "http://localhost:3001/register";
       const endpoint = URL;
       const { data } = await axios.post(endpoint, { email, password });
       const { message } = data;
-      console.log("SOY EL NUEVO USSSS", message);
       dispatch(registerSuccess(message));
     } catch (error) {
       dispatch(registerFailure(error));
@@ -244,7 +242,6 @@ export const login = (userData) => {
       const endpoint = "http://localhost:3001/login";
       const { data } = await axios.post(endpoint, { email, password });
       const { acc } = data;
-      console.log("DAAAATA", data);
       dispatch(loginSucces(acc));
     } catch (error) {
       dispatch(loginFailure(error));

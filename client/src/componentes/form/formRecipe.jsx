@@ -50,7 +50,6 @@ export default function FormRecipe() {
 
   function handlerChangeDiets(event) {
     const { value } = event.target;
-    console.log(value);
     const updatedDiets = recipe.diets.includes(value)
       ? recipe.diets.filter((d) => d !== value)
       : [...recipe.diets, value];

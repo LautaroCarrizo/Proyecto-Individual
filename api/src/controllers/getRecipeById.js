@@ -29,7 +29,6 @@ async function getRecipeById(req, res) {
           diets: data.diets,
         };
         detail = recipe;
-        console.log("SOY DETAIL API", recipe)
         return res.json({ detail });
       } else {
         return res.status(404).json({ message: "Not Found" });
