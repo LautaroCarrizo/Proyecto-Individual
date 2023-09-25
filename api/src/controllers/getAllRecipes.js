@@ -3,17 +3,14 @@ const URL = `https://api.spoonacular.com/recipes/complexSearch`;
 const { API_KEY } = process.env;
 const { Recipe } = require("../db");
 const { Diets } = require("../db");
-const handlerRecipes = require("../controllers/handlerBackApp/handlerRecipes");
 
 async function getAllRecipes(req, res) {
   try {
-    // const response = await axios.get(
-    //   `${URL}?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
-    // );
-    // const { data } = response;
-    // const results = data.results;
-     const results = await handlerRecipes();
-
+    const response = await axios.get(
+      `${URL}?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
+    );
+    const { data } = response;
+    const results = data.results;
     const recipesFromDB = await Recipe.findAll({
       attributes: ["id", "name", "image"],
       include: {
@@ -29,6 +26,7 @@ async function getAllRecipes(req, res) {
 
       return {
         id: recipe.id,
+        autor: recipe.autor,
         name: recipe.name,
         image: recipe.image,
         diets: mappedDiets,
@@ -39,6 +37,7 @@ async function getAllRecipes(req, res) {
     const apiRecipesMapped = results?.map((recipe) => {
       return {
         id: recipe.id,
+        autor: recipe.name,
         name: recipe.title,
         image: recipe.image,
         diets: recipe.diets,
@@ -51,6 +50,7 @@ async function getAllRecipes(req, res) {
     const filtroData = allDataRecipes.map((recipe) => {
       return {
         id: recipe.id,
+        autor: recipe.autor,
         name: recipe.name,
         image: recipe.image,
         diets: recipe.diets,

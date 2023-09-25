@@ -111,6 +111,7 @@ export const postRecipeAction = (dataRecipe) => {
       const endpoint = `http://localhost:3001/recipes`;
       const response = await axios.post(endpoint, dataRecipe);
       const message = response.data;
+      console.log(response.data, "SOY ACCTIONS")
       dispatch(postRecipesSuccess(message));
     } catch (error) {
       dispatch(postRecipesFailure(error.message));

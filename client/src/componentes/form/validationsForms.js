@@ -6,7 +6,9 @@ const validation = (recipeData) => {
   if (!recipeData.name) {
     errors.name = "Es obligatorio ingresar el nombre";
   }
-
+  if(numberRegex.test(recipeData.autor)){
+    errors.autor = "El nombre del Chef no puede contener numeros"
+  }
   if (numberRegex.test(recipeData.name)) {
     errors.name = "El nombre no puede contener números";
   }

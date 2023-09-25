@@ -94,7 +94,7 @@ function ErrorHandler() {
         </div>
       );
     } else {
-      return null; // No hay errores
+      return null; 
     }
   };
 
